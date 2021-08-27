@@ -18,11 +18,22 @@ public class AthleteFSM : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] float diveSpeed;
-    [SerializeField] float normalSwimmingSpeed;
+    [SerializeField] float defaultSwimmingSpeed;
+    [SerializeField] float bonusRecoverDuration;
+    [SerializeField] float bonusSwimmingSpeed;
+
+    [Header("Diving Timing")]
+    [SerializeField] float[] diveTimmingBounds;
+    [SerializeField] float[] recoverDurationAlphas;
+    [SerializeField] float[] diveSpeedAlphas;
+
+    bool isDivingFailed = false;
+    float bonusRecoverTotalDuration = 0f;
+    float currentSwimmingSpeed;
 
     public enum State
     {
-        Ready, DiveReady, Diving, DiveRecover ,Swimming, Finish
+        Ready, Diving, DiveRecover ,Swimming, Finish
     }
     [ReadOnly] [SerializeField] protected State currentState;
     protected bool isNewState;
@@ -51,22 +62,28 @@ public class AthleteFSM : MonoBehaviour
         isNewState = true;
         animator.SetInteger("State", (int)currentState);
     }
+    public void DivePressed(float timmingValue)
+    {
+        if (timmingValue == 0)
+            timmingValue = 100;
+        for(int i=0;i<diveTimmingBounds.Length; i++)
+        {
+            if(timmingValue >= diveTimmingBounds[i])
+            {
+                recoverDuration *= recoverDurationAlphas[i];
+                diveSpeed *= diveSpeedAlphas[i];
+                break;
+            }
+        }
+        if(timmingValue >= diveTimmingBounds[0])
+            isDivingFailed = true;
+        ChangeState(State.Diving);
+
+    }
 
     IEnumerator Ready()
     {
-        ChangeState(State.DiveReady);
         yield return null;
-    }
-    IEnumerator DiveReady()
-    {
-        while(!isNewState)
-        {
-            yield return null;
-            if(DiveButtonPressed())
-            {
-                ChangeState(State.Diving);
-            }
-        }
     }
     IEnumerator Diving()
     {
@@ -77,7 +94,9 @@ public class AthleteFSM : MonoBehaviour
         {
             yield return null;
             eTime += Time.deltaTime;
-            transform.position += new Vector3(diveSpeed, diveDepth / diveDuration, 0) * Time.deltaTime;
+            float yPos = Mathf.Lerp(0, diveDepth, TimeCurves.ExponentialMirrored(eTime / diveDuration));
+            transform.position += new Vector3(diveSpeed * Time.deltaTime, 0, 0);
+            transform.position = new Vector3(transform.position.x, originalPos.y + yPos, 0);
         }
         transform.position = new Vector3(transform.position.x, originalPos.y + diveDepth, 0);
         ChangeState(State.DiveRecover);
@@ -88,23 +107,25 @@ public class AthleteFSM : MonoBehaviour
         float eTime = 0f;
         Vector3 originalPos = transform.position;
         float recoverHeight = diveRecoverPoint.position.y - originalPos.y;
-        while (eTime < recoverDuration)
+        while (eTime < recoverDuration + bonusRecoverTotalDuration)
         {
             yield return null;
             eTime += Time.deltaTime;
             float t = eTime / recoverDuration;
-            swimmingSpeed = Mathf.Lerp(diveSpeed, normalSwimmingSpeed, TimeCurves.Exponential(t));
-            transform.position += new Vector3(swimmingSpeed, recoverHeight / recoverDuration, 0) * Time.deltaTime;
+            swimmingSpeed = Mathf.Lerp(diveSpeed, defaultSwimmingSpeed, TimeCurves.Exponential(t));
+            transform.position += new Vector3(swimmingSpeed, recoverHeight / (recoverDuration+ bonusRecoverTotalDuration), 0) * Time.deltaTime;
         }
         transform.position = new Vector3(transform.position.x, originalPos.y + recoverHeight, 0);
         ChangeState(State.Swimming);
     }
     IEnumerator Swimming()
     {
-        while(!isNewState)
+        currentSwimmingSpeed = defaultSwimmingSpeed;
+        while (!isNewState)
         {
             yield return null;
-            transform.position += new Vector3(normalSwimmingSpeed, 0, 0) * Time.deltaTime;
+            currentSwimmingSpeed = Mathf.Lerp(currentSwimmingSpeed, defaultSwimmingSpeed, Time.deltaTime);
+            transform.position += new Vector3(currentSwimmingSpeed, 0, 0) * Time.deltaTime;
         }
     }
     IEnumerator Finish()
@@ -113,27 +134,23 @@ public class AthleteFSM : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("!");
         if(collision.tag.Equals("FinishLine"))
         {
-            Debug.Log("!2");
             if (currentState == State.Swimming)
             {
-                Debug.Log("3");
                 ChangeState(State.Finish);
             }
         }
     }
-    bool DiveButtonPressed()
+    public void SwimButtonPressed()
     {
-        return Input.GetKeyDown(KeyCode.Space);
-    }
-
-    void ProcessInputs()
-    {
-    }
-    private void Update()
-    {
-        ProcessInputs();
+        if (currentState == State.DiveRecover || currentState == State.Diving)
+        {
+            bonusRecoverTotalDuration += bonusRecoverDuration;
+        }
+        else if (currentState == State.Swimming)
+        {
+            currentSwimmingSpeed += bonusSwimmingSpeed;
+        }
     }
 }
