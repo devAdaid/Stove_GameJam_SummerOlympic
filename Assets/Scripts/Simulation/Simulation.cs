@@ -8,11 +8,15 @@ public class Simulation : Singleton<Simulation>
     public bool IsGameEnded => PassedMonth > Constant.MONTH_COUNT;
     public SwimmerCharacter Swimmer { get; private set; }
     public int Gold { get; private set; }
+    public int Day = 0;
+    private ScheduleType[] _selectedSchedules;
 
     public Simulation()
     {
         Swimmer = new SwimmerCharacter();
         PassedMonth = 0;
+        Day = 0;
+        _selectedSchedules = null;
     }
 
     public void Reset()
@@ -20,6 +24,8 @@ public class Simulation : Singleton<Simulation>
         Swimmer = new SwimmerCharacter();
         Gold = 0;
         PassedMonth = 0;
+        Day = 0;
+        _selectedSchedules = null;
     }
 
     public int GetMonth()
@@ -71,6 +77,133 @@ public class Simulation : Singleton<Simulation>
     public void DecreaseStamina(int value)
     {
         Swimmer.DecreaseStat(StatType.Stamina, value);
+    }
+
+    public void StartSchedule(ScheduleType[] selectedSchedules)
+    {
+        Day = 1;
+        CheckAndProcessSchedule();
+    }
+
+    public void OnEndProcessSchedule()
+    {
+        Day += 1;
+        CheckAndProcessSchedule();
+    }
+
+    public void OnMiniGameEnd()
+    {
+        // TODO: 미니게임
+    }
+
+    private void CheckAndProcessSchedule()
+    {
+        if (Day > Constant.DAY_PER_MONTH_COUNT)
+        {
+            // 다음 달로 진행한다.
+            PassedMonth += 1;
+            Day = 0;
+        }
+        else
+        {
+            RequestProcessSchedule();
+        }
+    }
+
+    private void RequestProcessSchedule()
+    {
+        // 오늘 어떤 일정인지 확인한다.
+        var weekIndex = (Day - 1) / Constant.DAY_PER_WEEK_COUNT;
+        var scheduleType = _selectedSchedules[weekIndex];
+
+        // 경기일 경우 미니게임 플레이, 플레이 이후 7일 건너뛸것
+        if (scheduleType == ScheduleType.Match)
+        {
+            // TODO: 미니게임 연출
+        }
+        // 아닐 경우 일반 일정을 진행.
+        else
+        {
+            var scheduleData = GameData.I.Schedule.GetData(scheduleType);
+            var requestData = MakeProcessRequestData(scheduleData);
+            //진주님_클래스.ProcessSchedule(requestData, scheduleData.DisplayName, Day);
+        }
+    }
+    private ProcessScheduleRequestData MakeProcessRequestData(ScheduleData scheduleData)
+    {
+        Dictionary<StatType, int> statChanges = new Dictionary<StatType, int>();
+
+        int goldDiff = 0;
+        if (scheduleData.GoldCost > 0)
+        {
+            goldDiff -= scheduleData.GoldCost;
+        }
+
+        if (scheduleData.StaminaCost > 0)
+        {
+            statChanges.Add(StatType.Stamina, -scheduleData.StaminaCost);
+        }
+
+        foreach (var reward in scheduleData.RewardTypes)
+        {
+            AddRequestdChange(statChanges, reward, scheduleData.MinRewardValue, scheduleData.MaxRewardValue, scheduleData.RewardValueStep, out var rewardGoldDiff);
+            if (rewardGoldDiff > 0)
+            {
+                goldDiff = rewardGoldDiff;
+            }
+        }
+
+        var statChangedInfo = statChanges.Select(c => new StatChangedInfo(c.Key, c.Value)).ToList();
+        return new ProcessScheduleRequestData(statChangedInfo, goldDiff);
+    }
+
+    private void AddRequestdChange(Dictionary<StatType, int> statChanges, ScheduleRewardType rewardType, int minValue, int maxValue, int stepValue, out int goldDiff)
+    {
+        goldDiff = 0;
+        switch (rewardType)
+        {
+            case ScheduleRewardType.Stat_Stamina:
+                AddStatChange(statChanges, StatType.Stamina, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.SwimStat_Endurance:
+                AddStatChange(statChanges, StatType.Endurance, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.SwimStat_Quickness:
+                AddStatChange(statChanges, StatType.Quickness, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.SwimStat_Strength:
+                AddStatChange(statChanges, StatType.Strength, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.SwimStat_Flexibility:
+                AddStatChange(statChanges, StatType.Flexibility, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.SwimStat_All:
+                AddStatChange(statChanges, StatType.Endurance, minValue, maxValue, stepValue);
+                AddStatChange(statChanges, StatType.Quickness, minValue, maxValue, stepValue);
+                AddStatChange(statChanges, StatType.Strength, minValue, maxValue, stepValue);
+                AddStatChange(statChanges, StatType.Flexibility, minValue, maxValue, stepValue);
+                break;
+            case ScheduleRewardType.Gold:
+                var randomValue = GetRandomValue(minValue, maxValue, stepValue);
+                goldDiff = randomValue;
+                break;
+            default:
+                Debug.LogError($"보상을 전달할 수 없었습니다.");
+                break;
+        }
+    }
+
+    private void AddStatChange(Dictionary<StatType, int> statChanges, StatType statType, int minValue, int maxValue, int stepValue)
+    {
+        var randomValue = GetRandomValue(minValue, maxValue, stepValue);
+        statChanges.Add(statType, randomValue);
+    }
+
+    private int GetRandomValue(int minValue, int maxValue, int stepValue)
+    {
+        var stepCount = ((maxValue - minValue) / stepValue) + 1;
+        var randomStep = Random.Range(0, stepCount);
+        return minValue + randomStep * stepValue;
     }
 
     public void TempDoSchedule(ScheduleType[] schedules)
@@ -141,12 +274,5 @@ public class Simulation : Singleton<Simulation>
                 Debug.LogError($"보상을 전달할 수 없었습니다.");
                 break;
         }
-    }
-
-    private int GetRandomValue(int minValue, int maxValue, int stepValue)
-    {
-        var stepCount = ((maxValue - minValue) / stepValue) + 1;
-        var randomStep = Random.Range(0, stepCount);
-        return minValue + randomStep * stepValue;
     }
 }
