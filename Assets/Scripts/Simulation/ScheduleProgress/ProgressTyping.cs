@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ public class ProgressTyping : MonoBehaviour
     [Header("Typing Speed")]
     public float TypingSpeed = 0.1f;    //타이핑 속도
     public bool isSkipped;  //스킵 버튼을 눌렀는지 여부
+    public bool isFinished;
 
 
     //텍스트 리스트
@@ -24,7 +25,7 @@ public class ProgressTyping : MonoBehaviour
 
     void Start()
     {
-        isSkipped = false;  //스킵 여부 초기화
+        isSkipped = isFinished = false;  //스킵 여부 초기화
     }
 
     //텍스트 출력 실행 함수 -> 이 함수에 텍스트 리스트를 넣고 호출하면 텍스트가 출력됨
@@ -34,7 +35,7 @@ public class ProgressTyping : MonoBehaviour
     }
 
     //텍스트 리스트를 만드는 함수(일정과 )
-    public void ProcessSchedule(List<StatChangeInfo> statChangeInfo, string scheduleName)
+    public void ProcessSchedule(ProcessScheduleRequestData requestData, string scheduleName, int day)
     {
         //일정을 증가시키고 타이핑 연출을 보여줌
 
@@ -47,7 +48,7 @@ public class ProgressTyping : MonoBehaviour
         for (int i = 0; i < textList.Count; i++)
         {
             //Text Content 자식 오브젝트에 새 텍스트 생성, 타이핑 연출
-            Text newText = Instantiate(TextPrefab);
+            Text newText = Instantiate(WhiteText);
             newText.transform.SetParent(TextContent.transform, false);
             yield return StartCoroutine(Typing(newText, textList[i], TypingSpeed));
         }
@@ -98,4 +99,3 @@ public class ProgressTyping : MonoBehaviour
         }
     }
 }
-*/
