@@ -6,5 +6,6 @@ public static class ResourcePath
 {
     public static string MBTI_DATA = "Data/MBTI";
     public static string SCHEDULE_DATA = "Data/Schedule";
+    public static string AISTAT_DATA = "Data/AIStat";
     public static string SCHEDULE_ICON_SPRITE = "Sprites/ScheduleIcon";
 }

@@ -22,6 +22,7 @@ public class AthleteFSM : MonoBehaviour
 
 
 
+    [HideInInspector] new public string name;
     [HideInInspector] public float swimSpeedLerpSpeed;
     [HideInInspector] public float diveSwimDuration;
     [HideInInspector] public float maxSwimmingSpeed;

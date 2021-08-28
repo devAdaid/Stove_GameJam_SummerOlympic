@@ -14,7 +14,6 @@ public class SwimStatManager : MonoBehaviour
     public float[] diveSwimDurationAlphas;
 
     [Header("Dive Swim")]
-    public float diveSwimDuration;
     public float bonusDiveSwimDuration;
     public float diveSwimSpeed;
 
@@ -23,12 +22,6 @@ public class SwimStatManager : MonoBehaviour
 
     [Header("Swim")]
     public float defaultSwimmingSpeed;
-    public float bonusSwimmingSpeed;
-
-    float endurance=0; //최대 속도 유지 가능시간 ( swimSpeed 복구되는 시간으로 하면 될듯)
-    float quickness=0; //스타트 잠영 지속시간 ( diveSwimduration에 +)
-    float strength=0; //최대 속도 (maxSpeed
-    float flexibility=0; //가속도 (bonusSwimmingSpeed에 +)
 
     [Header("수영 속도 감소 속도 (지구력)")]
     [SerializeField] float a_endurance;
@@ -43,14 +36,43 @@ public class SwimStatManager : MonoBehaviour
     [SerializeField] float a_flexibility;
     [SerializeField] float defaultFlexibility;
 
+
+    float endurance = 0; //최대 속도 유지 가능시간 ( swimSpeed 복구되는 시간으로 하면 될듯)
+    float quickness = 0; //스타트 잠영 지속시간 ( diveSwimduration에 +)
+    float strength = 0; //최대 속도 (maxSpeed
+    float flexibility = 0; //가속도 (bonusSwimmingSpeed에 +)
+
+    List<int[]> tapSpeeds = new List<int[]>();
+
     public void SetStats(AthleteFSM [] athletes, int playerIndex)
     {
+        //선수 index 결정, 데이터 보관
+        List<AIStatData> statDatas = new List<AIStatData>();
+        for(int i=0; i< athletes.Length - 1; i++)
+        {
+            statDatas.Add(GameData.I.AIStat.Datas[i]);
+        }
+        bool isPlayerSet = false;
         for(int i=0; i<athletes.Length; i++)
         {
-            athletes[i].swimSpeedLerpSpeed = a_endurance * endurance + defaultEndurance;
-            athletes[i].diveSwimDuration = a_quickness * quickness + defaultQuickness;
-            athletes[i].maxSwimmingSpeed = a_strength * strength + defaultStrength;
-            athletes[i].bonusSwimmingSpeed = a_flexibility * flexibility + defaultFlexibility;
+            if(i == playerIndex)
+            {
+                athletes[i].name = Simulation.I.Swimmer.Name;
+                athletes[i].swimSpeedLerpSpeed = a_endurance * Simulation.I.Swimmer.GetStat(StatType.Endurance) + defaultEndurance;
+                athletes[i].diveSwimDuration = a_quickness * Simulation.I.Swimmer.GetStat(StatType.Quickness) + defaultQuickness;
+                athletes[i].maxSwimmingSpeed = a_strength * Simulation.I.Swimmer.GetStat(StatType.Strength) + defaultStrength;
+                athletes[i].bonusSwimmingSpeed = a_flexibility * Simulation.I.Swimmer.GetStat(StatType.Flexibility) + defaultFlexibility;
+                tapSpeeds.Add(new int[4] { 0, 0, 0, 0 });
+                isPlayerSet = true;
+                continue;
+            }
+            AIStatData data = statDatas[i - (isPlayerSet ? 1 : 0)];
+            athletes[i].name = data.Name;
+            athletes[i].swimSpeedLerpSpeed = a_endurance * data.Endurance + defaultEndurance;
+            athletes[i].diveSwimDuration = a_quickness * data.Quickness + defaultQuickness;
+            athletes[i].maxSwimmingSpeed = a_strength * data.Strength + defaultStrength;
+            athletes[i].bonusSwimmingSpeed = a_flexibility * data.Flexibility + defaultFlexibility;
+            tapSpeeds.Add(data.TapSpeeds);
         }
     }
 }

@@ -13,6 +13,7 @@ public class SwimGameManager : MonoBehaviour
     [SerializeField] Text speedText;
     [SerializeField] Text timeText;
     [SerializeField] AthleteFSM[] athletes;
+    [SerializeField] Text howToPlayText;
 
 
     [Header("Settings")]
@@ -45,6 +46,8 @@ public class SwimGameManager : MonoBehaviour
     IEnumerator Ready()
     {
         //다이빙 나오기 직전까지
+        yield return new WaitForSeconds(readyWaitDuration);
+        //yield return S
         yield return new WaitForSeconds(readyWaitDuration);
 
         timmingBar.gameObject.SetActive(true);
@@ -158,5 +161,14 @@ public class SwimGameManager : MonoBehaviour
     public AthleteFSM GetPlayer()
     {
         return athletes[playerLane];
+    }
+    public void ShowHowToPlay(string text)
+    {
+        howToPlayText.text = text;
+        StartCoroutine(HowToPlayCoroutine());
+    }
+    IEnumerator HowToPlayCoroutine()
+    {
+
     }
 }
