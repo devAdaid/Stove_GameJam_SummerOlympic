@@ -20,7 +20,7 @@ public class TypingTest : MonoBehaviour
     [Header("Store")]
     public GameObject storeView;
 
-    List<string> textList = new List<string>(); //텍스트 리스트
+    List<string> sendTextList = new List<string>(); //텍스트 리스트
 
     //글자색 변경: 변경할 부분을 <color=색상코드>와 </color> 사이에 넣기
 
@@ -30,20 +30,25 @@ public class TypingTest : MonoBehaviour
         storeView.SetActive(false); //상점 비활성화
 
         //임시 텍스트 리스트 추가. 
-        textList.Add("여기서 메시지 출력");
-        textList.Add("타이핑 효과 확인");
-        textList.Add("어떤 활동을 했는지 확인하고");
-        textList.Add("데이터 테이블에서 메시지를 가져올 예정");
-        textList.Add("올라가고 내려간 수치는 <color=#FF0000>글자색 변경해서</color> 표현할 예정");
-        textList.Add("글자색이 나중에 변경되는 것은 수정해야함");
+        sendTextList.Add("여기서 메시지 출력");
+        sendTextList.Add("타이핑 효과 확인");
+        sendTextList.Add("어떤 활동을 했는지 확인하고");
+        sendTextList.Add("데이터 테이블에서 메시지를 가져올 예정");
+        sendTextList.Add("올라가고 내려간 수치는 <color=#FF0000>글자색 변경해서</color> 표현할 예정");
+        sendTextList.Add("글자색이 나중에 변경되는 것은 수정해야함");
 
 
 
-        StartCoroutine(TypingText());
+        SendText(sendTextList);
+    }
+
+    public void SendText(List<string> textList)
+    {
+        StartCoroutine(TypingText(textList));
     }
 
     //텍스트 리스트의 텍스트를 생성하는 코루틴 함수
-    IEnumerator TypingText()
+    IEnumerator TypingText(List<string> textList)
     {
         for (int i = 0; i < textList.Count; i++)
         {

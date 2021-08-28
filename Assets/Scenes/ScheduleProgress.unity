@@ -2374,6 +2374,56 @@ MonoBehaviour:
   enduranceSlider: {fileID: 1555035445}
   flexibilitySlider: {fileID: 125626508}
   currentGold: {fileID: 1028589890}
+--- !u!1 &763600900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 763600902}
+  - component: {fileID: 763600901}
+  m_Layer: 0
+  m_Name: Setting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &763600901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763600900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a427f77070742c3a54f53f4315243f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: test
+  Gold: 50000
+  Stamina: 2300
+  Endurance: 1200
+  Quickness: 400
+  Strength: 800
+  Flexibility: 3300
+--- !u!4 &763600902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763600900}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &784641223
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,6 +4204,7 @@ GameObject:
   - component: {fileID: 1196178467}
   - component: {fileID: 1196178469}
   - component: {fileID: 1196178468}
+  - component: {fileID: 1196178470}
   m_Layer: 5
   m_Name: StoreView
   m_TagString: Untagged
@@ -4221,6 +4272,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196178466}
   m_CullTransparentMesh: 1
+--- !u!114 &1196178470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196178466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac1ba2048a6c9f4ea1c204bdd92dcf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FoodArray:
+  - {fileID: 918718744}
+  - {fileID: 1189915749}
+  - {fileID: 1792249528}
+  - {fileID: 1536978601}
+  - {fileID: 1931499354}
+  - {fileID: 228518635}
+  - {fileID: 1407209398}
+  - {fileID: 634616404}
+  TextView: {fileID: 1322823296}
+  currentGold: {fileID: 693909173}
 --- !u!1 &1225003884
 GameObject:
   m_ObjectHideFlags: 0
