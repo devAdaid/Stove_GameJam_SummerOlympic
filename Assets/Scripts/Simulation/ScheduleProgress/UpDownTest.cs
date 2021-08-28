@@ -17,13 +17,6 @@ public class UpDownTest : MonoBehaviour
     public Text EnduranceUp;
     public Text FlexibilityUp;
 
-    void Start()
-    {
-        //테스트용으로 값 10, 7 입력
-        ShowStaminaDown(10);
-        ShowQuicknessUp(7);
-    }
-
     public void ShowStaminaUp(int value)
     {
         //체력 증가치를 입력하면 텍스트 수정되어 활성화
