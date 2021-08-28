@@ -31,7 +31,11 @@ public class SwimmerCharacter
     {
         if (_statTable.TryGetValue(statType, out var previousValue))
         {
-            _statTable[statType] = previousValue + value;
+            var afterValue = previousValue + value;
+            var maxValue = (statType == StatType.Stamina) ? Constant.STAMINA_MAX : Constant.SWIMSTAT_MAX;
+            if (afterValue > maxValue) afterValue = maxValue;
+
+            _statTable[statType] = afterValue;
             return;
         }
 
@@ -42,7 +46,10 @@ public class SwimmerCharacter
     {
         if (_statTable.TryGetValue(statType, out var previousValue))
         {
-            _statTable[statType] = previousValue - value;
+            var afterValue = previousValue - value;
+            if (afterValue < 0) afterValue = 0;
+
+            _statTable[statType] = afterValue;
             return;
         }
     }
