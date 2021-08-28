@@ -30,21 +30,8 @@ public class ScheduleProgressTest : MonoBehaviour
     [Space(10f)]
     public Text currentGold;
 
-    void Awake()
+    void Start()
     {
-        // MBTI 등으로 정해진 기본 스탯을 적용한다.
-        // 여기서는 테스트를 위해 하드코딩된 스탯을 적용한다.
-        var baseStat = new Dictionary<StatType, int>()
-        {
-            {StatType.Stamina, 3300},
-            {StatType.Endurance, 3000},
-            {StatType.Quickness, 500},
-            {StatType.Strength, 2000},
-            {StatType.Flexibility, 1500}
-        };
-
-        Simulation.I.SetBaseStat(baseStat);
-
         UpdateStatName();
         UpdateStatValue();
         UpdateGoldUI();
@@ -127,7 +114,7 @@ public class ScheduleProgressTest : MonoBehaviour
 
     private void UpdateGoldUI()
     {
-        currentGold.text = GetGold();
+        currentGold.text = GetGold() + "원";
     }
 
     private string GetStatName(StatType statType)
