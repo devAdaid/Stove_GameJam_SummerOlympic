@@ -169,6 +169,6 @@ public class SwimGameManager : MonoBehaviour
     }
     IEnumerator HowToPlayCoroutine()
     {
-
+        yield return null;
     }
 }
