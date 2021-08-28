@@ -7,6 +7,7 @@ public class SwimGameManager : MonoBehaviour
 {
     public static float BestRecord = -1f;
     public static float Rank = 0f;
+    public static int[] SwimmerIndicies;
     [Header("References")]
     [SerializeField] SwimStatManager statManager;
     [SerializeField] Slider timmingBar;
@@ -109,7 +110,7 @@ public class SwimGameManager : MonoBehaviour
                 //���� ������ ����Ʈ
                 if (BestRecord == -1 || BestRecord > timer)
                     BestRecord = timer;
-                SwimGameManager.Rank = rank;
+                Rank = rank;
                 finishText.gameObject.SetActive(true);
                 break;
             }
