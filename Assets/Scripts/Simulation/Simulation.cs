@@ -91,7 +91,10 @@ public class Simulation : Singleton<Simulation>
             var scheduleData = GameData.I.Schedule.GetData(schedule);
             foreach (var reward in scheduleData.RewardTypes)
             {
-                DeliverReward(reward, scheduleData.MaxRewardValue * 7);
+                for (int i = 0; i < Constant.DAY_PER_WEEK_COUNT; i++)
+                {
+                    DeliverReward(reward, scheduleData.MinRewardValue, scheduleData.MaxRewardValue, scheduleData.RewardValueStep);
+                }
             }
             DecreaseGold(scheduleData.GoldCost);
             DecreaseStamina(scheduleData.StaminaCost);
@@ -100,37 +103,44 @@ public class Simulation : Singleton<Simulation>
         PassedMonth += 1;
     }
 
-    private void DeliverReward(ScheduleRewardType rewardType, int value)
+    private void DeliverReward(ScheduleRewardType rewardType, int minValue, int maxValue, int stepValue)
     {
         switch (rewardType)
         {
             case ScheduleRewardType.Stat_Stamina:
-                IncreaseSwimmerStat(StatType.Stamina, value);
+                IncreaseSwimmerStat(StatType.Stamina, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.SwimStat_Endurance:
-                IncreaseSwimmerStat(StatType.Endurance, value);
+                IncreaseSwimmerStat(StatType.Endurance, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.SwimStat_Quickness:
-                IncreaseSwimmerStat(StatType.Quickness, value);
+                IncreaseSwimmerStat(StatType.Quickness, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.SwimStat_Strength:
-                IncreaseSwimmerStat(StatType.Strength, value);
+                IncreaseSwimmerStat(StatType.Strength, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.SwimStat_Flexibility:
-                IncreaseSwimmerStat(StatType.Flexibility, value);
+                IncreaseSwimmerStat(StatType.Flexibility, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.SwimStat_All:
-                IncreaseSwimmerStat(StatType.Endurance, value);
-                IncreaseSwimmerStat(StatType.Quickness, value);
-                IncreaseSwimmerStat(StatType.Strength, value);
-                IncreaseSwimmerStat(StatType.Flexibility, value);
+                IncreaseSwimmerStat(StatType.Endurance, GetRandomValue(minValue, maxValue, stepValue));
+                IncreaseSwimmerStat(StatType.Quickness, GetRandomValue(minValue, maxValue, stepValue));
+                IncreaseSwimmerStat(StatType.Strength, GetRandomValue(minValue, maxValue, stepValue));
+                IncreaseSwimmerStat(StatType.Flexibility, GetRandomValue(minValue, maxValue, stepValue));
                 break;
             case ScheduleRewardType.Gold:
-                AddGold(value);
+                AddGold(GetRandomValue(minValue, maxValue, stepValue));
                 break;
             default:
                 Debug.LogError($"보상을 전달할 수 없었습니다.");
                 break;
         }
+    }
+
+    private int GetRandomValue(int minValue, int maxValue, int stepValue)
+    {
+        var stepCount = ((maxValue - minValue) / stepValue) + 1;
+        var randomStep = Random.Range(0, stepCount);
+        return minValue + randomStep * stepValue;
     }
 }
