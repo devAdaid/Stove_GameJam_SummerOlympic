@@ -9,6 +9,7 @@ public class GameData : Singleton<GameData>
     public readonly ScheduleDatas Schedule;
     public readonly FixedScheduleDatas FixedSchedule;
     public readonly AIStatDatas AIStat;
+    public readonly StoreItemDatas StoreItem;
 
     public GameData()
     {
@@ -16,5 +17,6 @@ public class GameData : Singleton<GameData>
         Schedule = new ScheduleDatas();
         FixedSchedule = new FixedScheduleDatas();
         AIStat = new AIStatDatas();
+        StoreItem = new StoreItemDatas();
     }
 }
