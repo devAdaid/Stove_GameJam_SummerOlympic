@@ -950,7 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\uD14C\uC2A4\uD2B8\uC774\uB984"
   Gold: 12000
-  Stamina: 50
+  Stamina: 100
   Endurance: 50
   Quickness: 25
   Strength: 30
@@ -1048,6 +1048,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357629877}
   m_CullTransparentMesh: 1
+--- !u!114 &403258595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518482377573666037, guid: 232ae2cac18124535bea22ec228f1dcf, type: 3}
+  m_PrefabInstance: {fileID: 1730553379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b0a6d9dcc1417fb3651a06dbf0993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &468613276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1222,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7148563889424426572, guid: 232ae2cac18124535bea22ec228f1dcf, type: 3}
   m_PrefabInstance: {fileID: 7148563890120789632}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &797337805 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518482377573666037, guid: 232ae2cac18124535bea22ec228f1dcf, type: 3}
+  m_PrefabInstance: {fileID: 7148563890120789632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b0a6d9dcc1417fb3651a06dbf0993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &870289516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1867,7 @@ GameObject:
   - component: {fileID: 1071953828}
   - component: {fileID: 1071953827}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text_Month
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2241,6 +2263,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470332747}
   m_CullTransparentMesh: 1
+--- !u!114 &1584925465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518482377573666037, guid: 232ae2cac18124535bea22ec228f1dcf, type: 3}
+  m_PrefabInstance: {fileID: 173710907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b0a6d9dcc1417fb3651a06dbf0993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1635974782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,7 +2362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfd49d395d54405b823d2d47acb3c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monthText: {fileID: 1071953827}
   _calendarSlot: {fileID: 1195558660}
+  _swimmerInfo: {fileID: 1939712932}
   _costPreviewSlot: {fileID: 976743804}
   _scheduleButtonRoot: {fileID: 1686815182}
   _scheduleButtonPrefab: {fileID: 5825440292127821353, guid: 7cbe6cc3ea2344483a70d025b92df2ac, type: 3}
@@ -3006,7 +3041,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1905005573}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1663337193}
+        m_TargetAssemblyTypeName: ScheduleSelectUI, Assembly-CSharp
+        m_MethodName: TempDoSchedule
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1905005573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3419,6 +3466,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nameText: {fileID: 1188266812}
+  _swimStatEntries:
+  - {fileID: 797337805}
+  - {fileID: 2136289952}
+  - {fileID: 1584925465}
+  - {fileID: 403258595}
 --- !u!1 &1957825540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +3640,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64a718f4b692a428193be631e129d0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2136289952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518482377573666037, guid: 232ae2cac18124535bea22ec228f1dcf, type: 3}
+  m_PrefabInstance: {fileID: 128689338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b0a6d9dcc1417fb3651a06dbf0993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7148563890120789632

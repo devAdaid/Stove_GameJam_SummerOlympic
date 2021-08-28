@@ -37,4 +37,13 @@ public class SwimmerCharacter
 
         _statTable.Add(statType, value);
     }
+
+    public void DecreaseStat(StatType statType, int value)
+    {
+        if (_statTable.TryGetValue(statType, out var previousValue))
+        {
+            _statTable[statType] = previousValue - value;
+            return;
+        }
+    }
 }

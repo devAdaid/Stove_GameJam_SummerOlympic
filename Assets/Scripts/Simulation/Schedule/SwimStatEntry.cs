@@ -14,15 +14,14 @@ public class SwimStatEntry : MonoBehaviour
     [SerializeField]
     private Text _statValueText;
 
-    private void Start()
+    public void UpdateEntry()
     {
         _statNameText.text = _statType.GetString();
 
         var currentStat = Simulation.I.Swimmer.GetStat(_statType);
-        var maxStat = Constant.STAMINA_MAX;
+        var maxStat = Constant.SWIMSTAT_MAX;
         _statGaugeFillImage.fillAmount = (float)currentStat / maxStat;
 
         _statValueText.text = currentStat.ToString();
     }
-
 }

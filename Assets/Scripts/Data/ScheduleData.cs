@@ -89,6 +89,7 @@ public class ScheduleDatas
     private ScheduleRewardType ParseRewardType(string rewardText) =>
     rewardText switch
     {
+        "체력" => ScheduleRewardType.Stat_Stamina,
         "근력" => ScheduleRewardType.SwimStat_Strength,
         "유연성" => ScheduleRewardType.SwimStat_Flexibility,
         "지구력" => ScheduleRewardType.SwimStat_Endurance,

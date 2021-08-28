@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
 {
     [SerializeField]
+    private Text _monthText;
+    [SerializeField]
     private CalendarSlot _calendarSlot;
+    [SerializeField]
+    private SwimmerInfoSlot _swimmerInfo;
     [SerializeField]
     private CostPreviewSlot _costPreviewSlot;
     [SerializeField]
@@ -33,6 +38,11 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
 
     public void SelectSchedule(ScheduleType schedule)
     {
+        if (Simulation.I.IsGameEnded)
+        {
+            return;
+        }
+
         var scheduleData = GameData.I.Schedule.GetData(schedule);
         if (_goldPreview < scheduleData.GoldCost)
         {
@@ -60,8 +70,33 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         UpdateUI();
     }
 
+    public void TempDoSchedule()
+    {
+        if (Simulation.I.IsGameEnded)
+        {
+            return;
+        }
+
+        if (_selectedScheduleCount < Constant.WEEK_PER_MONTH_COUNT)
+        {
+            return;
+        }
+
+        Simulation.I.TempDoSchedule(_selectedSchedules);
+        ResetSchedule();
+    }
+
     private void UpdateUI()
     {
+        if (Simulation.I.IsGameEnded)
+        {
+            _monthText.text = $"게임 종료";
+        }
+        else
+        {
+            _monthText.text = $"{Simulation.I.GetMonth()}월";
+        }
+        _swimmerInfo.UpdateSlot();
         _calendarSlot.SetCalender(_selectedSchedules);
         _costPreviewSlot.SetCostPreview(_goldPreview, _staminaPreview);
         SetScheduleButtons();
@@ -70,7 +105,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     private void SetScheduleButtons()
     {
         var scheduleDatas = GameData.I.Schedule.SelectableDatas;
-        bool isSteminaZero = _staminaPreview == 0;
+        bool isSteminaZero = _staminaPreview <= 0;
         for (int i = 0; i < scheduleDatas.Count; i++)
         {
             var data = scheduleDatas[i];
