@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class SwimGameManager : MonoBehaviour
 {
     [Header("References")]
-    public Slider timmingBar;
-    [SerializeField] AthleteFSM player;
-    
+    [SerializeField] Slider timmingBar;
+    [SerializeField] AthleteFSM[] athletes;
+    [SerializeField] int playerLane;
+    [SerializeField] Text rankText;
+    [SerializeField] Text rankSubtext;
+
+
     [Header("Settings")]
     [SerializeField] float readyWaitDuration;
     [SerializeField] float timmingBarDecreaseSpeed;
@@ -17,6 +21,8 @@ public class SwimGameManager : MonoBehaviour
 
     bool isTimmerStopped = false;
     State currentState;
+    int inputState = 0;
+
     private void Start()
     {
         StartCoroutine(Ready());
@@ -40,13 +46,16 @@ public class SwimGameManager : MonoBehaviour
                 break;
             }
         }
-        player.DivePressed(timmingBar.value);
         timmingBar.GetComponent<Animator>().SetTrigger("Close");
         //change button "stop timmer" -> "swim"
         //start all athletes
-
-
-
+        for(int i=0; i<athletes.Length; i++)
+        {
+            if(i == playerLane)
+                athletes[playerLane].DivePressed(timmingBar.value);
+            else
+                athletes[i].DivePressed(Random.Range(1, 80));
+        }
         currentState = State.Playing;
         StartCoroutine(Playing());
     }
@@ -54,11 +63,47 @@ public class SwimGameManager : MonoBehaviour
     {
         yield return null;
     }
-    public void OnMainButtonPressed()
+
+    private void Update()
     {
-        if (currentState == State.Ready)
+        if(Input.GetKeyDown(KeyCode.Space) && currentState == State.Ready)
+        {
             isTimmerStopped = true;
-        else if (currentState == State.Playing)
-            player.SwimButtonPressed();
+        }
+        else if(currentState == State.Playing)
+        {
+            if(athletes[playerLane].CurrentState == AthleteFSM.State.Swimming)
+            {
+                if ((inputState == 0 || inputState == 2) && Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    athletes[playerLane].SwimButtonPressed();
+                    inputState = 1;
+                }
+                else if ((inputState == 0 || inputState == 1) && Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    athletes[playerLane].SwimButtonPressed();   
+                    inputState = 2;
+                }
+            }
+            else 
+            {
+            if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    athletes[playerLane].SwimButtonPressed();
+                }
+            }
+        }
+    }
+    void SetRankText(int rank)
+    {
+        rankText.text = rank.ToString();
+        if (rank == 1)
+            rankSubtext.text = "st";
+        else if (rank == 2)
+            rankSubtext.text = "nd";
+        else if (rank == 3)
+            rankSubtext.text = "rd";
+        else
+            rankSubtext.text = "th";
     }
 }

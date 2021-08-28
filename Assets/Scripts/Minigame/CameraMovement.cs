@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] Transform rightBound;
     [SerializeField] AthleteFSM player;
+    [SerializeField] float followSpeed;
 
     private void Update()
     {
@@ -14,7 +15,7 @@ public class CameraMovement : MonoBehaviour
             if(player.transform.position.x > transform.position.x)
             {
                 transform.position = Vector3.Lerp(transform.position,
-                    new Vector3(player.transform.position.x, transform.position.y, transform.position.z), Time.deltaTime);
+                    new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z), Time.deltaTime * followSpeed);
             }
         }
     }
