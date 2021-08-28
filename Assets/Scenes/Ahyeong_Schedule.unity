@@ -949,12 +949,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: "\uD14C\uC2A4\uD2B8\uC774\uB984"
-  Gold: 12000
-  Stamina: 100
-  Endurance: 50
-  Quickness: 25
-  Strength: 30
-  Flexibility: 40
+  Gold: 100000
+  Stamina: 300
+  Endurance: 2
+  Quickness: 2
+  Strength: 2
+  Flexibility: 2
 --- !u!4 &340603579
 Transform:
   m_ObjectHideFlags: 0

@@ -21,15 +21,18 @@ public class ScheduleButtonEntry : MonoBehaviour
         _scheduleType = data.ScheduleType;
         _iconImage.sprite = data.IconSprite;
         _nameText.text = data.DisplayName;
-        _staminaCostText.text = $"-{data.StaminaCost}S";
 
-        if (currentGoldPreview < data.GoldCost)
+        var totalStaminaCost = data.StaminaCost * Constant.DAY_PER_WEEK_COUNT;
+        _staminaCostText.text = $"-{totalStaminaCost}S";
+
+        var totalGoldCost = data.GoldCost * Constant.DAY_PER_WEEK_COUNT;
+        if (currentGoldPreview < totalGoldCost)
         {
-            _goldCostText.text = $"<color=red>-{data.GoldCost}G</color>";
+            _goldCostText.text = $"<color=red>-{totalGoldCost}G</color>";
         }
         else
         {
-            _goldCostText.text = $"-{data.GoldCost}G";
+            _goldCostText.text = $"-{totalGoldCost}G";
         }
     }
 

@@ -122,7 +122,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         int gold = 0;
         for (int i = 0; i < _selectedScheduleCount; i++)
         {
-            gold += GameData.I.Schedule.GetData(_selectedSchedules[i]).GoldCost;
+            gold += GameData.I.Schedule.GetData(_selectedSchedules[i]).GoldCost * Constant.DAY_PER_WEEK_COUNT;
         }
         return gold;
     }
@@ -132,7 +132,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         int stamina = 0;
         for (int i = 0; i < _selectedScheduleCount; i++)
         {
-            stamina += GameData.I.Schedule.GetData(_selectedSchedules[i]).StaminaCost;
+            stamina += GameData.I.Schedule.GetData(_selectedSchedules[i]).StaminaCost * Constant.DAY_PER_WEEK_COUNT;
         }
         return stamina;
     }

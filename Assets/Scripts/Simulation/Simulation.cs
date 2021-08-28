@@ -96,10 +96,11 @@ public class Simulation : Singleton<Simulation>
                     DeliverReward(reward, scheduleData.MinRewardValue, scheduleData.MaxRewardValue, scheduleData.RewardValueStep);
                 }
             }
-            DecreaseGold(scheduleData.GoldCost);
-            DecreaseStamina(scheduleData.StaminaCost);
+            DecreaseGold(scheduleData.GoldCost * Constant.DAY_PER_WEEK_COUNT);
+            DecreaseStamina(scheduleData.StaminaCost * Constant.DAY_PER_WEEK_COUNT);
         }
 
+        AddGold(Constant.GOLD_DELIVERED_AT_MONTH);
         PassedMonth += 1;
     }
 
