@@ -13,5 +13,4 @@ public class SaveData
 
     public Dictionary<StatType, int> statTable = new Dictionary<StatType, int>();
 
-
 }
