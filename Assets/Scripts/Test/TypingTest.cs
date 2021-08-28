@@ -42,6 +42,13 @@ public class TypingTest : MonoBehaviour
         SendText(sendTextList);
     }
 
+    //텍스트 메시지를 만드는 함수
+    public void WriterScheduleName()
+    {
+
+    }
+
+    //텍스트 출력 실행 함수
     public void SendText(List<string> textList)
     {
         StartCoroutine(TypingText(textList));

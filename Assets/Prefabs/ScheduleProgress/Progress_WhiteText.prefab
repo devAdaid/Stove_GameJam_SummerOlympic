@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2910149859719181327}
   - component: {fileID: 2910149859719181424}
   m_Layer: 5
-  m_Name: ScheduleText
+  m_Name: Progress_WhiteText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

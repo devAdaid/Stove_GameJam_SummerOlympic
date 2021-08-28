@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,11 +56,10 @@ public class SwimGameManager : MonoBehaviour
     }
     IEnumerator Ready()
     {
-        //´ÙÀÌºù ³ª¿À±â Á÷Àü±îÁö
         yield return new WaitForSeconds(readyWaitDuration);
         timmingBar.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(ShowHowToPlayAndWait("½ºÆäÀÌ½º¹Ù¸¦ ¿¬Å¸ÇÏ¼¼¿ä!", true));
+        yield return StartCoroutine(ShowHowToPlayAndWait("ìŠ¤íŽ˜ì´ìŠ¤ë°”ë¥¼ ì—°íƒ€í•˜ì„¸ìš”!", true));
         
         isGettingSpaceInput = true;
         yield return StartCoroutine(countDown.StartCountDown(1));
@@ -111,13 +110,13 @@ public class SwimGameManager : MonoBehaviour
             yield return null;
             if(athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
             {
-                //°ÔÀÓ ³¡³ª´Â ÀÌÆåÆ®
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
                 break;
             }
             if (eTimeSinceLastInput >= howToPlayShowDelay)
             {
                 eTimeSinceLastInput = 0f;
-                yield return StartCoroutine(ShowHowToPlayAndWait("ÁÂ¿ì ¹æÇâÅ°¸¦ ¹ø°¥¾Æ ¿¬Å¸ÇÏ¼¼¿ä", false));
+                yield return StartCoroutine(ShowHowToPlayAndWait("ì¢Œìš° ë°©í–¥í‚¤ë¥¼ ì—°íƒ€í•˜ì„¸ìš”!", false));
             }
         }
         SetTimeText(timer);

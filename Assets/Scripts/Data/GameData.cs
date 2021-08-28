@@ -7,12 +7,14 @@ public class GameData : Singleton<GameData>
 {
     public readonly MBTIDatas MBTI;
     public readonly ScheduleDatas Schedule;
+    public readonly FixedScheduleDatas FixedSchedule;
     public readonly AIStatDatas AIStat;
 
     public GameData()
     {
         MBTI = new MBTIDatas();
         Schedule = new ScheduleDatas();
+        FixedSchedule = new FixedScheduleDatas();
         AIStat = new AIStatDatas();
     }
 }

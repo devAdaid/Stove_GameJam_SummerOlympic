@@ -13,4 +13,5 @@ public enum ScheduleType
     Rest,
     Rest_Forced,
     TrialMatch,
+    Match,
 }

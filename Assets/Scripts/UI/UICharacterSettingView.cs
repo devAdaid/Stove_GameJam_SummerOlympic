@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UICharacterSettingView : UIView
 {
     public InputField playerNameInputField;
-    public Text MBTIText;
 
     public MBTI MBTI = new MBTI();
 
@@ -45,13 +45,18 @@ public class UICharacterSettingView : UIView
     }
 
     public bool IsCompleteInput() =>
-        (playerNameInputField.text != originPlayerName) && MBTI.IsValid();
+        (playerNameInputField.text != string.Empty) && MBTI.IsValid();
 
 
     public void CompleteSetting()
     {
         if (IsCompleteInput())
-            UIManager.I.SetScheduleView();
+        {
+            var stats = GameData.I.MBTI.GetDefaultStats(MBTI);
+            Simulation.I.SetBaseStat(stats);
+            Simulation.I.Swimmer.SetName(playerNameInputField.text);
+            SceneManager.LoadScene("2_Schedule");
+        }
     }
 
 }

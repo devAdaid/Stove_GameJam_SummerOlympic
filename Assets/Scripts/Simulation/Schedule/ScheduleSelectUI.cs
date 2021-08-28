@@ -18,7 +18,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     [SerializeField]
     private ScheduleButtonEntry _scheduleButtonPrefab;
     private ScheduleType[] _selectedSchedules = new ScheduleType[Constant.WEEK_PER_MONTH_COUNT];
-    private int _selectedScheduleCount = 0;
+    private int _currentScheduleIndex = 0;
     private List<ScheduleButtonEntry> _scheduleButtonEntries = new List<ScheduleButtonEntry>();
     private int _goldPreview => Simulation.I.Gold - GetTotalGoldCost();
     private int _staminaPreview => Simulation.I.Swimmer.GetStat(StatType.Stamina) - GetTotalStamina();
@@ -49,10 +49,11 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             return;
         }
 
-        if (_selectedScheduleCount < _selectedSchedules.Length)
+        if (_currentScheduleIndex < _selectedSchedules.Length)
         {
-            _selectedSchedules[_selectedScheduleCount] = schedule;
-            _selectedScheduleCount += 1;
+            _selectedSchedules[_currentScheduleIndex] = schedule;
+            _currentScheduleIndex += 1;
+            CheckFixedAndMoveIndex();
         }
 
         UpdateUI();
@@ -65,7 +66,15 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             _selectedSchedules[i] = ScheduleType.Invalid;
         }
 
-        _selectedScheduleCount = 0;
+        var month = Simulation.I.GetMonth();
+        if (GameData.I.FixedSchedule.TryGetData(month, out var fixedScheduleData))
+        {
+            int weekIndex = fixedScheduleData.Week - 1;
+            _selectedSchedules[weekIndex] = ScheduleType.Match;
+        }
+
+        _currentScheduleIndex = 0;
+        CheckFixedAndMoveIndex();
 
         UpdateUI();
     }
@@ -77,7 +86,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             return;
         }
 
-        if (_selectedScheduleCount < Constant.WEEK_PER_MONTH_COUNT)
+        if (_currentScheduleIndex < Constant.WEEK_PER_MONTH_COUNT)
         {
             return;
         }
@@ -109,10 +118,6 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         for (int i = 0; i < scheduleDatas.Count; i++)
         {
             var data = scheduleDatas[i];
-            if (isSteminaZero)
-            {
-                data = GameData.I.Schedule.GetData(ScheduleType.Rest_Forced);
-            }
             _scheduleButtonEntries[i].SetButton(data, _goldPreview);
         }
     }
@@ -120,9 +125,12 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     private int GetTotalGoldCost()
     {
         int gold = 0;
-        for (int i = 0; i < _selectedScheduleCount; i++)
+        for (int i = 0; i < _currentScheduleIndex; i++)
         {
-            gold += GameData.I.Schedule.GetData(_selectedSchedules[i]).GoldCost * Constant.DAY_PER_WEEK_COUNT;
+            if (_selectedSchedules[i] != ScheduleType.Match)
+            {
+                gold += GameData.I.Schedule.GetData(_selectedSchedules[i]).GoldCost * Constant.DAY_PER_WEEK_COUNT;
+            }
         }
         return gold;
     }
@@ -130,10 +138,26 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     private int GetTotalStamina()
     {
         int stamina = 0;
-        for (int i = 0; i < _selectedScheduleCount; i++)
+        for (int i = 0; i < _currentScheduleIndex; i++)
         {
-            stamina += GameData.I.Schedule.GetData(_selectedSchedules[i]).StaminaCost * Constant.DAY_PER_WEEK_COUNT;
+            if (_selectedSchedules[i] != ScheduleType.Match)
+            {
+                stamina += GameData.I.Schedule.GetData(_selectedSchedules[i]).StaminaCost * Constant.DAY_PER_WEEK_COUNT;
+            }
         }
         return stamina;
+    }
+
+    private void CheckFixedAndMoveIndex()
+    {
+        if (_currentScheduleIndex >= _selectedSchedules.Length)
+        {
+            return;
+        }
+
+        if (_selectedSchedules[_currentScheduleIndex] != ScheduleType.Invalid)
+        {
+            _currentScheduleIndex += 1;
+        }
     }
 }
