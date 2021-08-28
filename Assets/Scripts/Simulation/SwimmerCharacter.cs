@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class SwimmerCharacter
 {
+    public string Name { get; private set; }
     private Dictionary<StatType, int> _statTable = new Dictionary<StatType, int>();
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
 
     public void SetBaseStat(Dictionary<StatType, int> stats)
     {
@@ -25,10 +31,26 @@ public class SwimmerCharacter
     {
         if (_statTable.TryGetValue(statType, out var previousValue))
         {
-            _statTable[statType] = previousValue + value;
+            var afterValue = previousValue + value;
+            var maxValue = (statType == StatType.Stamina) ? Constant.STAMINA_MAX : Constant.SWIMSTAT_MAX;
+            if (afterValue > maxValue) afterValue = maxValue;
+
+            _statTable[statType] = afterValue;
             return;
         }
 
         _statTable.Add(statType, value);
+    }
+
+    public void DecreaseStat(StatType statType, int value)
+    {
+        if (_statTable.TryGetValue(statType, out var previousValue))
+        {
+            var afterValue = previousValue - value;
+            if (afterValue < 0) afterValue = 0;
+
+            _statTable[statType] = afterValue;
+            return;
+        }
     }
 }
