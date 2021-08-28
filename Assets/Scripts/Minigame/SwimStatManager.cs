@@ -20,8 +20,6 @@ public class SwimStatManager : MonoBehaviour
     [Header("Dive Recover")]
     public float recoverDuration;
 
-    [Header("Swim")]
-    public float defaultSwimmingSpeed;
 
     [Header("수영 속도 감소 속도 (지구력)")]
     [SerializeField] float a_endurance;
@@ -42,7 +40,6 @@ public class SwimStatManager : MonoBehaviour
     float strength = 0; //최대 속도 (maxSpeed
     float flexibility = 0; //가속도 (bonusSwimmingSpeed에 +)
 
-    List<int[]> tapSpeeds = new List<int[]>();
 
     public void SetStats(AthleteFSM [] athletes, int playerIndex)
     {
@@ -61,8 +58,11 @@ public class SwimStatManager : MonoBehaviour
                 athletes[i].swimSpeedLerpSpeed = a_endurance * Simulation.I.Swimmer.GetStat(StatType.Endurance) + defaultEndurance;
                 athletes[i].diveSwimDuration = a_quickness * Simulation.I.Swimmer.GetStat(StatType.Quickness) + defaultQuickness;
                 athletes[i].maxSwimmingSpeed = a_strength * Simulation.I.Swimmer.GetStat(StatType.Strength) + defaultStrength;
+                athletes[i].defaultSwimmingSpeed = athletes[i].maxSwimmingSpeed * 0.5f;
                 athletes[i].bonusSwimmingSpeed = a_flexibility * Simulation.I.Swimmer.GetStat(StatType.Flexibility) + defaultFlexibility;
-                tapSpeeds.Add(new int[4] { 0, 0, 0, 0 });
+                athletes[i].flagType = 0;
+                athletes[i].tapSpeeds = new int[4] { 0, 0, 0, 0 };
+                athletes[i].diveStat = 0;
                 isPlayerSet = true;
                 continue;
             }
@@ -71,8 +71,11 @@ public class SwimStatManager : MonoBehaviour
             athletes[i].swimSpeedLerpSpeed = a_endurance * data.Endurance + defaultEndurance;
             athletes[i].diveSwimDuration = a_quickness * data.Quickness + defaultQuickness;
             athletes[i].maxSwimmingSpeed = a_strength * data.Strength + defaultStrength;
+            athletes[i].defaultSwimmingSpeed = athletes[i].maxSwimmingSpeed * 0.5f;
             athletes[i].bonusSwimmingSpeed = a_flexibility * data.Flexibility + defaultFlexibility;
-            tapSpeeds.Add(data.TapSpeeds);
+            athletes[i].flagType = data.FlagType;
+            athletes[i].tapSpeeds = data.TapSpeeds;
+            athletes[i].diveStat = data.DiveStat;
         }
     }
 }
