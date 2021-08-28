@@ -5,9 +5,15 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] Transform rightBound;
-    [SerializeField] AthleteFSM player;
+    [SerializeField] SwimGameManager gameManager;
     [SerializeField] float followSpeed;
 
+    AthleteFSM player;
+
+    private void Awake()
+    {
+        player = gameManager.GetPlayer();
+    }
     private void Update()
     {
         if(transform.position.x < rightBound.position.x)

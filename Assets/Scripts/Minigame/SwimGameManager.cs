@@ -7,13 +7,15 @@ public class SwimGameManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Slider timmingBar;
-    [SerializeField] AthleteFSM[] athletes;
-    [SerializeField] int playerLane;
     [SerializeField] Text rankText;
     [SerializeField] Text rankSubtext;
+    [SerializeField] AthleteFSM[] athletes;
 
 
     [Header("Settings")]
+    [SerializeField] int playerLane;
+    [SerializeField] Transform leftCorner;
+    [SerializeField] Transform rightCorner;
     [SerializeField] float readyWaitDuration;
     [SerializeField] float timmingBarDecreaseSpeed;
 
@@ -30,6 +32,11 @@ public class SwimGameManager : MonoBehaviour
     }
     IEnumerator Ready()
     {
+        rightCorner.position = new Vector3(rightCorner.position.x, leftCorner.position.y - (rightCorner.position.x - leftCorner.position.x) / 2, 0);
+        for (int i=0; i< athletes.Length; i++)
+        {
+            athletes[i].transform.position = leftCorner.position + (rightCorner.position - leftCorner.position) * (i+1) / (athletes .Length+ 1);
+        }
         //다이빙 나오기 직전까지
         yield return new WaitForSeconds(readyWaitDuration);
 
@@ -93,6 +100,14 @@ public class SwimGameManager : MonoBehaviour
                 }
             }
         }
+        int rank = 0;
+        for(int i=0; i<athletes.Length; i++)
+        {
+            float realX = athletes[i].transform.position.x + (athletes[i].transform.position.y - athletes[playerLane].transform.position.y) * 2;
+            if (realX >= athletes[playerLane].transform.position.x)
+                rank++;
+        }
+        SetRankText(rank);
     }
     void SetRankText(int rank)
     {
@@ -105,5 +120,9 @@ public class SwimGameManager : MonoBehaviour
             rankSubtext.text = "rd";
         else
             rankSubtext.text = "th";
+    }
+    public AthleteFSM GetPlayer()
+    {
+        return athletes[playerLane];
     }
 }

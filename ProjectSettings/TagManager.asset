@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Athletes
+    uniqueID: 534895821
+    locked: 0
+  - name: Water
+    uniqueID: 1651546669
+    locked: 0

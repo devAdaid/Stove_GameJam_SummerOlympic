@@ -11,7 +11,11 @@ public class AthleteFSM : MonoBehaviour
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] SwimGameManager gameManager;
+    [SerializeField] SwimEffectManager effectManager;
     [SerializeField] Transform frameTransform;
+    [SerializeField] Transform waterImage;
+    [SerializeField] float waterImageMax;
+    [SerializeField] float waterImageMin;
 
     [Header("Read Only Values")]
     [ReadOnly] [SerializeField] protected State currentState;
@@ -97,12 +101,13 @@ public class AthleteFSM : MonoBehaviour
     {
         float eTime = 0f;
         Vector3 originalPos = transform.position;
+        float originalHeight = frameTransform.localPosition.y;
         while(eTime < diveDuration)
         {
             yield return null;
 
             eTime += Time.deltaTime;
-            float yPos = Mathf.Lerp(0, diveDepth, TimeCurves.ExponentialMirrored(eTime / diveDuration));
+            float yPos = Mathf.Lerp(originalHeight, diveDepth, TimeCurves.ExponentialMirrored(eTime / diveDuration));
             transform.position += moveDirection * diveSpeed * Time.deltaTime;
             frameTransform.localPosition = new Vector3(0, yPos, 0);
         }
@@ -166,5 +171,13 @@ public class AthleteFSM : MonoBehaviour
         {
             currentSwimmingSpeed += bonusSwimmingSpeed;
         }
+    }
+    private void Update()
+    {
+        waterImage.localPosition = new Vector3(waterImage.localPosition.x, -frameTransform.localPosition.y + (waterImageMin+waterImageMax)/2, 0);
+    }
+    void SetWater(float normalizedValue)
+    {
+        waterImage.localPosition = new Vector3(0, Mathf.Lerp(waterImageMin,waterImageMax,normalizedValue));
     }
 }
