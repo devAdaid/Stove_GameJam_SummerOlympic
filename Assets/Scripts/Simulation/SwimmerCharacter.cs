@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class SwimmerCharacter
 {
+    public string Name { get; private set; }
     private Dictionary<StatType, int> _statTable = new Dictionary<StatType, int>();
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
 
     public void SetBaseStat(Dictionary<StatType, int> stats)
     {
@@ -30,5 +36,14 @@ public class SwimmerCharacter
         }
 
         _statTable.Add(statType, value);
+    }
+
+    public void DecreaseStat(StatType statType, int value)
+    {
+        if (_statTable.TryGetValue(statType, out var previousValue))
+        {
+            _statTable[statType] = previousValue - value;
+            return;
+        }
     }
 }
