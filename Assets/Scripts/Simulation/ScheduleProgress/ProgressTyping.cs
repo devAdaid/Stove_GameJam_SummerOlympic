@@ -1,57 +1,44 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//타이핑 테스트
-public class TypingTest : MonoBehaviour
+//일정 진행 과정을 타이핑하는 클래스
+public class ProgressTyping : MonoBehaviour
 {
     [Header("Typing Objects")]
     public GameObject TextContent;  //텍스트를 UI를 생성할 위치
-    public Text TextPrefab;
+    public Text WhiteText;  //흰색 텍스트(기본)
+    public Text RedText;    //빨간색 텍스트(증가)
+    public Text BlueText;   //파란색 텍스트(감소)
 
     [Header("Typing Speed")]
-    public float TypingSpeed = 0.1f;
-    public bool isSkipped;
+    public float TypingSpeed = 0.1f;    //타이핑 속도
+    public bool isSkipped;  //스킵 버튼을 눌렀는지 여부
 
-    [Space(10f)]
-    public bool isFinished; //타이핑이 다 끝났는지 여부
 
-    [Header("Store")]
-    public GameObject storeView;
+    //텍스트 리스트
+    //이 리스트에 있는 텍스트들이 묶음으로 출력됨(ex. 일정 한 주, 아이템 하나 등)
+    List<string> sendTextList = new List<string>();
 
-    List<string> sendTextList = new List<string>(); //텍스트 리스트
-
-    //글자색 변경: 변경할 부분을 <color=색상코드>와 </color> 사이에 넣기
 
     void Start()
     {
-        isSkipped = isFinished = false;
-        storeView.SetActive(false); //상점 비활성화
-
-        //임시 텍스트 리스트 추가. 
-        sendTextList.Add("여기서 메시지 출력");
-        sendTextList.Add("타이핑 효과 확인");
-        sendTextList.Add("어떤 활동을 했는지 확인하고");
-        sendTextList.Add("데이터 테이블에서 메시지를 가져올 예정");
-        sendTextList.Add("올라가고 내려간 수치는 <color=#FF0000>글자색 변경해서</color> 표현할 예정");
-        sendTextList.Add("글자색이 나중에 변경되는 것은 수정해야함");
-
-
-
-        SendText(sendTextList);
+        isSkipped = false;  //스킵 여부 초기화
     }
 
-    //텍스트 메시지를 만드는 함수
-    public void WriterScheduleName()
-    {
-
-    }
-
-    //텍스트 출력 실행 함수
+    //텍스트 출력 실행 함수 -> 이 함수에 텍스트 리스트를 넣고 호출하면 텍스트가 출력됨
     public void SendText(List<string> textList)
     {
         StartCoroutine(TypingText(textList));
+    }
+
+    //텍스트 리스트를 만드는 함수(일정과 )
+    public void ProcessSchedule(List<StatChangeInfo> statChangeInfo, string scheduleName)
+    {
+        //일정을 증가시키고 타이핑 연출을 보여줌
+
+        //리스트 초기화
     }
 
     //텍스트 리스트의 텍스트를 생성하는 코루틴 함수
@@ -78,7 +65,7 @@ public class TypingTest : MonoBehaviour
         }
     }
 
-    //스킵 버튼 누르면 출력 속도 빨라짐 -> 타이핑 속도 변경
+    //스킵 버튼 온오프로 타이핑 속도 변경
     public void SkipOnOff()
     {
         if (!isSkipped)  //false라면 true로 변경 == 스킵
@@ -110,23 +97,5 @@ public class TypingTest : MonoBehaviour
             }
         }
     }
-
-    public void StoreOpen()
-    {
-        //월말 텍스트가 끝나면 상점이 열림
-        storeView.SetActive(true); //상점 활성화
-    }
-
-    public void StoreClose()
-    {
-        //상점 닫는 함수
-        storeView.SetActive(false); //상점 비활성화
-    }
-
-    public void ScheduleFinish()
-    {
-        //끝내기 버튼을 누르면 일정 종료
-        StoreClose();
-        DeleteText();   //텍스트 모두 삭제
-    }
 }
+*/
