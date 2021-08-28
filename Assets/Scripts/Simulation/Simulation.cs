@@ -88,6 +88,11 @@ public class Simulation : Singleton<Simulation>
 
         foreach (var schedule in schedules)
         {
+            if (schedule == ScheduleType.Match)
+            {
+                continue;
+            }
+
             var scheduleData = GameData.I.Schedule.GetData(schedule);
             foreach (var reward in scheduleData.RewardTypes)
             {
