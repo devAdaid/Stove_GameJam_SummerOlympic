@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 62276204}
   - component: {fileID: 62276203}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 201007564}
   - component: {fileID: 201007563}
   m_Layer: 5
-  m_Name: Icon (1)
+  m_Name: Icon _Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -948,8 +948,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a427f77070742c3a54f53f4315243f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: "\uD14C\uC2A4\uD2B8\uC774\uB984"
   Gold: 12000
-  Stamina: 300
+  Stamina: 50
   Endurance: 50
   Quickness: 25
   Strength: 30
@@ -980,7 +981,7 @@ GameObject:
   - component: {fileID: 357629880}
   - component: {fileID: 357629879}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Text_Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1533,7 +1534,7 @@ GameObject:
   - component: {fileID: 950436065}
   - component: {fileID: 950436064}
   m_Layer: 5
-  m_Name: Image
+  m_Name: NextDue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1608,6 +1609,7 @@ GameObject:
   - component: {fileID: 976743801}
   - component: {fileID: 976743803}
   - component: {fileID: 976743802}
+  - component: {fileID: 976743804}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -1676,6 +1678,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976743800}
   m_CullTransparentMesh: 1
+--- !u!114 &976743804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976743800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd711eca9f7014cc583e5a27ccd99da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldCostText: {fileID: 62276203}
+  _staminaCostText: {fileID: 357629879}
 --- !u!1 &977021539
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2178,7 @@ GameObject:
   - component: {fileID: 1470332750}
   - component: {fileID: 1470332749}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Icon_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2314,6 +2330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _calendarSlot: {fileID: 1195558660}
+  _costPreviewSlot: {fileID: 976743804}
   _scheduleButtonRoot: {fileID: 1686815182}
   _scheduleButtonPrefab: {fileID: 5825440292127821353, guid: 7cbe6cc3ea2344483a70d025b92df2ac, type: 3}
 --- !u!1 &1686815181
@@ -3320,6 +3337,7 @@ GameObject:
   - component: {fileID: 1939712929}
   - component: {fileID: 1939712931}
   - component: {fileID: 1939712930}
+  - component: {fileID: 1939712932}
   m_Layer: 5
   m_Name: SwimmerInfo
   m_TagString: Untagged
@@ -3388,6 +3406,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939712928}
   m_CullTransparentMesh: 1
+--- !u!114 &1939712932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939712928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe30264c247d4a0bab6b28d4600f235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameText: {fileID: 1188266812}
 --- !u!1 &1957825540
 GameObject:
   m_ObjectHideFlags: 0

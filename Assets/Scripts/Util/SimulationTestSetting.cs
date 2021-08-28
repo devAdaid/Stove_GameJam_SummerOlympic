@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SimulationTestSetting : MonoBehaviour
 {
+    [Header("이름")]
+    public string Name;
     [Header("골드")]
     public int Gold;
     [Header("체력")]
@@ -26,6 +28,7 @@ public class SimulationTestSetting : MonoBehaviour
         stats.Add(StatType.Strength, Strength);
         stats.Add(StatType.Flexibility, Flexibility);
         Simulation.I.SetBaseStat(stats);
+        Simulation.I.SetSwimmerName(Name);
         Simulation.I.AddGold(Gold);
     }
 }

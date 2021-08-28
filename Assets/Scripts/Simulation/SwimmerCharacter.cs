@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class SwimmerCharacter
 {
+    public string Name { get; private set; }
     private Dictionary<StatType, int> _statTable = new Dictionary<StatType, int>();
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
 
     public void SetBaseStat(Dictionary<StatType, int> stats)
     {

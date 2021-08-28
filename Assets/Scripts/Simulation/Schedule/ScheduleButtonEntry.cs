@@ -16,13 +16,21 @@ public class ScheduleButtonEntry : MonoBehaviour
 
     private ScheduleType _scheduleType;
 
-    public void SetButton(ScheduleData data)
+    public void SetButton(ScheduleData data, int currentGoldPreview)
     {
         _scheduleType = data.ScheduleType;
         _iconImage.sprite = data.IconSprite;
         _nameText.text = data.DisplayName;
-        _goldCostText.text = $"-{data.GoldCost}G";
         _staminaCostText.text = $"-{data.StaminaCost}S";
+
+        if (currentGoldPreview < data.GoldCost)
+        {
+            _goldCostText.text = $"<color=red>-{data.GoldCost}G</color>";
+        }
+        else
+        {
+            _goldCostText.text = $"-{data.GoldCost}G";
+        }
     }
 
     public void SelectSchedule()

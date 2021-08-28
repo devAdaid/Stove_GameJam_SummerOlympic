@@ -9,8 +9,10 @@ public class CostPreviewSlot : MonoBehaviour
     private Text _goldCostText;
     [SerializeField]
     private Text _staminaCostText;
-    public void SetCostPreview(int totalGoldCost, int totalStaminaCost)
+
+    public void SetCostPreview(int goldPreview, int staminaPreview)
     {
-        var currentGold = Simulation.I.Gold;
+        _goldCostText.text = goldPreview.ToString();
+        _staminaCostText.text = staminaPreview.ToString();
     }
 }
