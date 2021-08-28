@@ -10,8 +10,8 @@ public class AIStatData
     public readonly int Quickness;
     public readonly int Strength;
     public readonly int Flexibility;
-    public readonly int [] TapSpeeds;
-    public AIStatData( int index, string name,
+    public readonly int[] TapSpeeds;
+    public AIStatData(int index, string name,
         int endurance, int quickness,
         int strength, int flexibility, int[] tapSpeeds)
     {
@@ -25,7 +25,7 @@ public class AIStatData
     }
 }
 
-public class AIStatDatas : MonoBehaviour
+public class AIStatDatas
 {
     public List<AIStatData> Datas { get { return datas; } }
     List<AIStatData> datas = new List<AIStatData>();
@@ -35,17 +35,17 @@ public class AIStatDatas : MonoBehaviour
         int index = 0;
         foreach (var line in parsedDatas)
         {
-            string name = (string)line["ÀÌ¸§"];
-            int endurance = (int)line["½ÉÆóÁö±¸·Â"];
-            int quickness = (int)line["¼ø¹ß·Â"];
-            int strength = (int)line["±Ù·Â"];
-            int flexibility = (int)line["À¯¿¬¼º"];
+            string name = (string)line["ì´ë¦„"];
+            int endurance = (int)line["ì‹¬íì§€êµ¬ë ¥"];
+            int quickness = (int)line["ìˆœë°œë ¥"];
+            int strength = (int)line["ê·¼ë ¥"];
+            int flexibility = (int)line["ìœ ì—°ì„±"];
             int[] tapSpeed = new int[4];
-            tapSpeed[0] = (int)line["½ºÅ¸Æ®°ÔÀÓ"];
+            tapSpeed[0] = (int)line["ìŠ¤íƒ€íŠ¸ê²Œì„"];
             tapSpeed[1] = (int)line["25-50"];
             tapSpeed[2] = (int)line["50-75"];
             tapSpeed[3] = (int)line["75-100"];
-            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility,tapSpeed );
+            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility, tapSpeed);
             datas.Add(data);
         }
     }

@@ -59,6 +59,7 @@ public class MBTIDatas
             stats.Add(StatType.Quickness, data.Quickness);
             stats.Add(StatType.Strength, data.Strength);
             stats.Add(StatType.Flexibility, data.Flexibility);
+            return stats;
         }
 
         Debug.LogWarning($"MBTI 스탯 데이터를 찾을 수 없었습니다: {mbtiKey}");
