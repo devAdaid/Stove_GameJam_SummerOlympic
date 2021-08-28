@@ -174,6 +174,82 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &32917370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32917371}
+  - component: {fileID: 32917373}
+  - component: {fileID: 32917372}
+  m_Layer: 5
+  m_Name: TimeBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &32917371
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32917370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1804821405}
+  m_Father: {fileID: 705924506}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 667.626, y: 462.37964}
+  m_SizeDelta: {x: 553.7483, y: 103.7007}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &32917372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32917370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &32917373
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32917370}
+  m_CullTransparentMesh: 1
 --- !u!1 &39677417
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +627,85 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &236612469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236612470}
+  - component: {fileID: 236612472}
+  - component: {fileID: 236612471}
+  m_Layer: 5
+  m_Name: SpeedText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &236612470
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236612469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1440073717}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -28.5568, y: -9}
+  m_SizeDelta: {x: 183.3075, y: 121.475}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &236612471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236612469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 95
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 177
+    m_Alignment: 2
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 5.2
+--- !u!222 &236612472
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236612469}
+  m_CullTransparentMesh: 1
 --- !u!1 &274603921
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,35 +786,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 1911302239}
   animator: {fileID: 1045086594}
-  spriteRenderer: {fileID: 0}
-  gameManager: {fileID: 572554837}
-  effectManager: {fileID: 0}
+  statManager: {fileID: 0}
   frameTransform: {fileID: 1045086593}
   waterImage: {fileID: 1161629160}
   waterImageMax: -0.16
   waterImageMin: -1.25
   currentState: 0
   currentSwimmingSpeed: 0
-  bonusRecoverTotalDuration: 0
-  diveDuration: 0.4
-  recoverDuration: 1
-  diveSpeed: 5
-  diveDepth: -0.5
-  defaultSwimmingSpeed: 3
-  bonusRecoverDuration: 0.2
-  bonusSwimmingSpeed: 0.3
-  diveTimmingBounds:
-  - 66
-  - 33
-  - 0
-  recoverDurationAlphas:
-  - 0.2
-  - 0.75
-  - 1
-  diveSpeedAlphas:
-  - 0.2
-  - 0.75
-  - 1
+  swimSpeedLerpSpeed: 0
+  diveSwimDuration: 0.5
+  maxSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
 --- !u!4 &274603925
 Transform:
   m_ObjectHideFlags: 0
@@ -706,7 +843,7 @@ RectTransform:
   m_Children:
   - {fileID: 1921019388}
   m_Father: {fileID: 705924506}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -831,35 +968,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 1831225202}
   animator: {fileID: 913083500}
-  spriteRenderer: {fileID: 0}
-  gameManager: {fileID: 572554837}
-  effectManager: {fileID: 0}
+  statManager: {fileID: 0}
   frameTransform: {fileID: 913083499}
   waterImage: {fileID: 1721719296}
   waterImageMax: -0.16
   waterImageMin: -1.25
   currentState: 0
   currentSwimmingSpeed: 0
-  bonusRecoverTotalDuration: 0
-  diveDuration: 0.4
-  recoverDuration: 1
-  diveSpeed: 5
-  diveDepth: -0.5
-  defaultSwimmingSpeed: 3
-  bonusRecoverDuration: 0.2
-  bonusSwimmingSpeed: 0.3
-  diveTimmingBounds:
-  - 66
-  - 33
-  - 0
-  recoverDurationAlphas:
-  - 0.2
-  - 0.75
-  - 1
-  diveSpeedAlphas:
-  - 0.2
-  - 0.75
-  - 1
+  swimSpeedLerpSpeed: 0
+  diveSwimDuration: 0.5
+  maxSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
 --- !u!4 &398251348
 Transform:
   m_ObjectHideFlags: 0
@@ -1114,6 +1233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 572554836}
   - component: {fileID: 572554837}
+  - component: {fileID: 572554838}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1147,9 +1267,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd0748cf542ac1488181e41fa666904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statManager: {fileID: 0}
   timmingBar: {fileID: 1793674846}
   rankText: {fileID: 1921019389}
   rankSubtext: {fileID: 1885800332}
+  speedText: {fileID: 236612471}
+  timeText: {fileID: 1804821406}
   athletes:
   - {fileID: 274603924}
   - {fileID: 788548309}
@@ -1161,6 +1284,40 @@ MonoBehaviour:
   rightCorner: {fileID: 111211273}
   readyWaitDuration: 1
   timmingBarDecreaseSpeed: 50
+--- !u!114 &572554838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572554835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821ebf67f641dc442b5dc1131c1ca0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diveDuration: 0.3
+  diveSpeed: 7
+  diveDepth: -0.5
+  diveTimmingBounds:
+  - 66
+  - 33
+  - 0
+  diveSwimDurationAlphas: []
+  diveSwimDuration: 0
+  bonusDiveSwimDuration: 0
+  diveSwimSpeed: 0
+  recoverDuration: 0
+  defaultSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
+  a_endurance: 0
+  defaultEndurance: 0
+  a_quickness: 0
+  defaultQuickness: 0
+  a_strength: 0
+  defaultStrength: 0
+  a_flexibility: 0
+  defaultFlexibility: 0
 --- !u!1 &596407458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,139 +1475,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
---- !u!1 &614232290
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 614232291}
-  - component: {fileID: 614232294}
-  - component: {fileID: 614232293}
-  - component: {fileID: 614232292}
-  m_Layer: 5
-  m_Name: MainButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &614232291
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614232290}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1550739175}
-  m_Father: {fileID: 705924506}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 738, y: -314}
-  m_SizeDelta: {x: 300, y: 300}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &614232292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614232290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 614232293}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 572554837}
-        m_TargetAssemblyTypeName: SwimGameManager, Assembly-CSharp
-        m_MethodName: OnMainButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &614232293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614232290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &614232294
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614232290}
-  m_CullTransparentMesh: 1
 --- !u!1 &621937996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,35 +1654,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 680370208}
   animator: {fileID: 1628542163}
-  spriteRenderer: {fileID: 0}
-  gameManager: {fileID: 572554837}
-  effectManager: {fileID: 0}
+  statManager: {fileID: 0}
   frameTransform: {fileID: 1628542162}
   waterImage: {fileID: 1570358111}
   waterImageMax: -0.16
   waterImageMin: -1.25
   currentState: 0
   currentSwimmingSpeed: 0
-  bonusRecoverTotalDuration: 0
-  diveDuration: 0.4
-  recoverDuration: 1
-  diveSpeed: 5
-  diveDepth: -0.5
-  defaultSwimmingSpeed: 3
-  bonusRecoverDuration: 0.2
-  bonusSwimmingSpeed: 0.3
-  diveTimmingBounds:
-  - 66
-  - 33
-  - 0
-  recoverDurationAlphas:
-  - 0.2
-  - 0.75
-  - 1
-  diveSpeedAlphas:
-  - 0.2
-  - 0.75
-  - 1
+  swimSpeedLerpSpeed: 0
+  diveSwimDuration: 0.5
+  maxSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
 --- !u!4 &643110751
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,7 +1833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &705924503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,8 +1907,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1793674845}
-  - {fileID: 614232291}
   - {fileID: 296031727}
+  - {fileID: 1440073717}
+  - {fileID: 32917371}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1991,35 +1998,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 39677418}
   animator: {fileID: 21035074}
-  spriteRenderer: {fileID: 0}
-  gameManager: {fileID: 572554837}
-  effectManager: {fileID: 0}
+  statManager: {fileID: 0}
   frameTransform: {fileID: 21035073}
   waterImage: {fileID: 968802166}
   waterImageMax: -0.16
   waterImageMin: -1.25
   currentState: 0
   currentSwimmingSpeed: 0
-  bonusRecoverTotalDuration: 0
-  diveDuration: 0.4
-  recoverDuration: 1
-  diveSpeed: 5
-  diveDepth: -0.5
-  defaultSwimmingSpeed: 3
-  bonusRecoverDuration: 0.2
-  bonusSwimmingSpeed: 0.3
-  diveTimmingBounds:
-  - 66
-  - 33
-  - 0
-  recoverDurationAlphas:
-  - 0.2
-  - 0.75
-  - 1
-  diveSpeedAlphas:
-  - 0.2
-  - 0.75
-  - 1
+  swimSpeedLerpSpeed: 0
+  diveSwimDuration: 0.5
+  maxSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
 --- !u!4 &788548310
 Transform:
   m_ObjectHideFlags: 0
@@ -2370,7 +2359,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2494,7 +2483,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1550739174
+--- !u!1 &1440073716
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2502,76 +2491,73 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1550739175}
-  - component: {fileID: 1550739177}
-  - component: {fileID: 1550739176}
+  - component: {fileID: 1440073717}
+  - component: {fileID: 1440073719}
+  - component: {fileID: 1440073718}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SpeedBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1550739175
+--- !u!224 &1440073717
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550739174}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 1440073716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 614232291}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 236612470}
+  m_Father: {fileID: 705924506}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 862, y: -412}
+  m_SizeDelta: {x: 165, y: 178.46}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1550739176
+--- !u!114 &1440073718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550739174}
+  m_GameObject: {fileID: 1440073716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Button
---- !u!222 &1550739177
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1440073719
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550739174}
+  m_GameObject: {fileID: 1440073716}
   m_CullTransparentMesh: 1
 --- !u!1 &1570358110
 GameObject:
@@ -2898,35 +2884,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 59478657}
   animator: {fileID: 558890002}
-  spriteRenderer: {fileID: 0}
-  gameManager: {fileID: 572554837}
-  effectManager: {fileID: 0}
+  statManager: {fileID: 0}
   frameTransform: {fileID: 558890001}
   waterImage: {fileID: 610647141}
   waterImageMax: -0.16
   waterImageMin: -1.25
   currentState: 0
   currentSwimmingSpeed: 0
-  bonusRecoverTotalDuration: 0
-  diveDuration: 0.4
-  recoverDuration: 1
-  diveSpeed: 5
-  diveDepth: -0.5
-  defaultSwimmingSpeed: 3
-  bonusRecoverDuration: 0.2
-  bonusSwimmingSpeed: 0.3
-  diveTimmingBounds:
-  - 66
-  - 33
-  - 0
-  recoverDurationAlphas:
-  - 0.2
-  - 0.75
-  - 1
-  diveSpeedAlphas:
-  - 0.2
-  - 0.75
-  - 1
+  swimSpeedLerpSpeed: 0
+  diveSwimDuration: 0.5
+  maxSwimmingSpeed: 0
+  bonusSwimmingSpeed: 0
 --- !u!4 &1775498556
 Transform:
   m_ObjectHideFlags: 0
@@ -3051,6 +3019,85 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1804821404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804821405}
+  - component: {fileID: 1804821407}
+  - component: {fileID: 1804821406}
+  m_Layer: 5
+  m_Name: TimeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1804821405
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804821404}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 32917371}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -9}
+  m_SizeDelta: {x: 542.152, y: 121.475}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1804821406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804821404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 95
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 177
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 00:00:00
+--- !u!222 &1804821407
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804821404}
+  m_CullTransparentMesh: 1
 --- !u!1 &1831225201
 GameObject:
   m_ObjectHideFlags: 0

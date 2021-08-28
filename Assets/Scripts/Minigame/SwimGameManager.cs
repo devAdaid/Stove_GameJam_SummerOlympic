@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class SwimGameManager : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] SwimStatManager statManager;
     [SerializeField] Slider timmingBar;
     [SerializeField] Text rankText;
     [SerializeField] Text rankSubtext;
+    [SerializeField] Text speedText;
+    [SerializeField] Text timeText;
     [SerializeField] AthleteFSM[] athletes;
 
 
@@ -24,7 +27,16 @@ public class SwimGameManager : MonoBehaviour
     bool isTimmerStopped = false;
     State currentState;
     int inputState = 0;
+    private void Awake()
+    {
+        rightCorner.position = new Vector3(rightCorner.position.x, leftCorner.position.y - (rightCorner.position.x - leftCorner.position.x) / 2, 0);
+        for (int i = 0; i < athletes.Length; i++)
+        {
+            athletes[i].transform.position = leftCorner.position + (rightCorner.position - leftCorner.position) * (i + 1) / (athletes.Length + 1);
+        }
+        statManager.SetStats(athletes, playerLane);
 
+    }
     private void Start()
     {
         StartCoroutine(Ready());
@@ -32,11 +44,6 @@ public class SwimGameManager : MonoBehaviour
     }
     IEnumerator Ready()
     {
-        rightCorner.position = new Vector3(rightCorner.position.x, leftCorner.position.y - (rightCorner.position.x - leftCorner.position.x) / 2, 0);
-        for (int i=0; i< athletes.Length; i++)
-        {
-            athletes[i].transform.position = leftCorner.position + (rightCorner.position - leftCorner.position) * (i+1) / (athletes .Length+ 1);
-        }
         //다이빙 나오기 직전까지
         yield return new WaitForSeconds(readyWaitDuration);
 
@@ -54,8 +61,7 @@ public class SwimGameManager : MonoBehaviour
             }
         }
         timmingBar.GetComponent<Animator>().SetTrigger("Close");
-        //change button "stop timmer" -> "swim"
-        //start all athletes
+
         for(int i=0; i<athletes.Length; i++)
         {
             if(i == playerLane)
@@ -68,7 +74,34 @@ public class SwimGameManager : MonoBehaviour
     }
     IEnumerator Playing()
     {
-        yield return null;
+        float timer = 0f;
+        while(true)
+        {
+            //time
+            SetTimeText(timer);
+            timer += Time.deltaTime;
+            //rank
+            int rank = 0;
+            for (int i = 0; i < athletes.Length; i++)
+            {
+                float realX = athletes[i].transform.position.x + (athletes[i].transform.position.y - athletes[playerLane].transform.position.y) * 2;
+                if (realX >= athletes[playerLane].transform.position.x)
+                    rank++;
+            }
+            SetRankText(rank);
+            //speed
+            SetSpeedText(athletes[playerLane].CurrentSpeed);
+
+            yield return null;
+            if(athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
+            {
+                break;
+            }
+        }
+        SetTimeText(timer);
+
+        currentState = State.Finish;
+
     }
 
     private void Update()
@@ -100,14 +133,6 @@ public class SwimGameManager : MonoBehaviour
                 }
             }
         }
-        int rank = 0;
-        for(int i=0; i<athletes.Length; i++)
-        {
-            float realX = athletes[i].transform.position.x + (athletes[i].transform.position.y - athletes[playerLane].transform.position.y) * 2;
-            if (realX >= athletes[playerLane].transform.position.x)
-                rank++;
-        }
-        SetRankText(rank);
     }
     void SetRankText(int rank)
     {
@@ -120,6 +145,15 @@ public class SwimGameManager : MonoBehaviour
             rankSubtext.text = "rd";
         else
             rankSubtext.text = "th";
+    }
+    void SetSpeedText(float speed)
+    {
+        speedText.text = string.Format("{0:0.0}", speed);
+    }
+    void SetTimeText(float eTime)
+    {
+        timeText.text = ((int)eTime/60).ToString().PadLeft(2,'0') + ":"
+            + string.Format("{0:00.00}", (eTime % 60));
     }
     public AthleteFSM GetPlayer()
     {
