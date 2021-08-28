@@ -7,6 +7,7 @@ public class ProgressStore : MonoBehaviour
 {
     //상점
     public Button[] FoodArray;
+    public int currentPage; //현재 페이지
     public GameObject TextView; //텍스트 출력 장소
 
     [Space(10f)]
@@ -21,6 +22,8 @@ public class ProgressStore : MonoBehaviour
 
     void Start()
     {
+        currentPage = 0;    //현재 페이지: 0
+
         //각 버튼에 구매 함수 추가
         for (int i = 0; i < FoodArray.Length; i++)
         {
@@ -51,6 +54,8 @@ public class ProgressStore : MonoBehaviour
         tempList.Add(redText);
 
         TextView.GetComponent<ProgressTyping>().SendText(tempList);
+        
+        //스탯, 돈 증감 적용하기
 
         UpdateGoldUI();
     }
@@ -64,5 +69,29 @@ public class ProgressStore : MonoBehaviour
     {
         //수영선수의 골드를 가져옴
         return $"{Simulation.I.Gold}";
+    }
+
+    public void LeftButton()
+    {
+        //왼쪽 버튼을 누르면
+        if (currentPage != 0)
+        {
+            //현재 페이지가 0페이지가 아니라면
+            currentPage--; //페이지 변경
+
+            //상품 텍스트 변경(1~8번 상품)
+        }
+    }
+
+    public void RightButton()
+    {
+        //오른쪽 버튼을 누르면
+        if (currentPage != 1)
+        {
+            //현재 페이지가 1페이지가 아니라면
+            currentPage++;    //페이지 변경
+
+            //상품 텍스트 변경(9~16번 상품)
+        }
     }
 }
