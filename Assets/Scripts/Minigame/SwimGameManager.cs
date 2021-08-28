@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SwimGameManager : MonoBehaviour
 {
+    public static float BestRecord = -1f;
+    public static float Rank = 0f;
     [Header("References")]
     [SerializeField] SwimStatManager statManager;
     [SerializeField] Slider timmingBar;
@@ -17,12 +19,11 @@ public class SwimGameManager : MonoBehaviour
     [SerializeField] ResultBoard resultBoard;
     [SerializeField] CountDown countDown;
     [SerializeField] Animator mainUIs;
+    [SerializeField] FinishText finishText;
 
 
     [Header("Settings")]
     [SerializeField] int playerLane;
-    [SerializeField] Transform leftCorner;
-    [SerializeField] Transform rightCorner;
     [SerializeField] float readyWaitDuration;
     [SerializeField] float valuePerSpaceHit;
     [SerializeField] float howToPlayShowDelay;
@@ -41,11 +42,6 @@ public class SwimGameManager : MonoBehaviour
         isFinished = new bool[athletes.Length];
         for (int i = 0; i < isFinished.Length; i++)
             isFinished[i] = false;
-        rightCorner.position = new Vector3(rightCorner.position.x, leftCorner.position.y - (rightCorner.position.x - leftCorner.position.x) / 2, 0);
-        for (int i = 0; i < athletes.Length; i++)
-        {
-            athletes[i].transform.position = leftCorner.position + (rightCorner.position - leftCorner.position) * (i + 1) / (athletes.Length + 1);
-        }
         statManager.SetStats(athletes, playerLane);
 
     }
@@ -111,6 +107,10 @@ public class SwimGameManager : MonoBehaviour
             if(athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
             {
                 //���� ������ ����Ʈ
+                if (BestRecord == -1 || BestRecord > timer)
+                    BestRecord = timer;
+                SwimGameManager.Rank = rank;
+                finishText.gameObject.SetActive(true);
                 break;
             }
             if (eTimeSinceLastInput >= howToPlayShowDelay)
@@ -238,5 +238,15 @@ public class SwimGameManager : MonoBehaviour
         }
         Time.timeScale = 1;
         howToPlayText.transform.parent.gameObject.SetActive(false);
+    }
+    public void ExitScene()
+    {
+        StartCoroutine(ExitSceneCoroutine());
+    }
+    IEnumerator ExitSceneCoroutine()
+    {
+        resultBoard.Close();
+        yield return new WaitForSeconds(1.3f);
+        //change scene
     }
 }
