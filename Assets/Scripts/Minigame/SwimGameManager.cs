@@ -14,6 +14,9 @@ public class SwimGameManager : MonoBehaviour
     [SerializeField] Text timeText;
     [SerializeField] AthleteFSM[] athletes;
     [SerializeField] Text howToPlayText;
+    [SerializeField] ResultBoard resultBoard;
+    [SerializeField] CountDown countDown;
+    [SerializeField] Animator mainUIs;
 
 
     [Header("Settings")]
@@ -21,15 +24,23 @@ public class SwimGameManager : MonoBehaviour
     [SerializeField] Transform leftCorner;
     [SerializeField] Transform rightCorner;
     [SerializeField] float readyWaitDuration;
-    [SerializeField] float timmingBarDecreaseSpeed;
+    [SerializeField] float valuePerSpaceHit;
+    [SerializeField] float howToPlayShowDelay;
 
+
+    List<AthleteFSM> finishedOrder = new List<AthleteFSM>();
+    bool[] isFinished;
     enum State { Ready, Playing, Finish }
 
-    bool isTimmerStopped = false;
     State currentState;
     int inputState = 0;
+    float eTimeSinceLastInput = 0f;
+    bool isGettingSpaceInput = false;
     private void Awake()
     {
+        isFinished = new bool[athletes.Length];
+        for (int i = 0; i < isFinished.Length; i++)
+            isFinished[i] = false;
         rightCorner.position = new Vector3(rightCorner.position.x, leftCorner.position.y - (rightCorner.position.x - leftCorner.position.x) / 2, 0);
         for (int i = 0; i < athletes.Length; i++)
         {
@@ -47,30 +58,23 @@ public class SwimGameManager : MonoBehaviour
     {
         //다이빙 나오기 직전까지
         yield return new WaitForSeconds(readyWaitDuration);
-        //yield return S
-        yield return new WaitForSeconds(readyWaitDuration);
-
         timmingBar.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
+        yield return StartCoroutine(ShowHowToPlayAndWait("스페이스바를 연타하세요!", true));
+        
+        isGettingSpaceInput = true;
+        yield return StartCoroutine(countDown.StartCountDown(1));
+        mainUIs.SetTrigger("Open");
+        isGettingSpaceInput = false;
 
-        while(timmingBar.value > 0)
-        {
-            yield return null;
-
-            timmingBar.value -= timmingBarDecreaseSpeed * Time.deltaTime;
-            if(isTimmerStopped)
-            {
-                break;
-            }
-        }
         timmingBar.GetComponent<Animator>().SetTrigger("Close");
 
         for(int i=0; i<athletes.Length; i++)
         {
             if(i == playerLane)
-                athletes[playerLane].DivePressed(timmingBar.value);
+                athletes[playerLane].StartDive(timmingBar.value);
             else
-                athletes[i].DivePressed(Random.Range(1, 80));
+                athletes[i].StartDive(athletes[i].diveStat);
         }
         currentState = State.Playing;
         StartCoroutine(Playing());
@@ -78,11 +82,14 @@ public class SwimGameManager : MonoBehaviour
     IEnumerator Playing()
     {
         float timer = 0f;
-        while(true)
+        eTimeSinceLastInput = 0f;
+        while (true)
         {
             //time
             SetTimeText(timer);
             timer += Time.deltaTime;
+            eTimeSinceLastInput += Time.deltaTime;
+
             //rank
             int rank = 0;
             for (int i = 0; i < athletes.Length; i++)
@@ -90,6 +97,12 @@ public class SwimGameManager : MonoBehaviour
                 float realX = athletes[i].transform.position.x + (athletes[i].transform.position.y - athletes[playerLane].transform.position.y) * 2;
                 if (realX >= athletes[playerLane].transform.position.x)
                     rank++;
+                if(athletes[i].CurrentState == AthleteFSM.State.Finish && !isFinished[i])
+                {
+                    isFinished[i] = true;
+                    athletes[i].finishedTime = timer;
+                    finishedOrder.Add(athletes[i]);
+                }
             }
             SetRankText(rank);
             //speed
@@ -98,20 +111,51 @@ public class SwimGameManager : MonoBehaviour
             yield return null;
             if(athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
             {
+                //게임 끝나는 이펙트
                 break;
+            }
+            if (eTimeSinceLastInput >= howToPlayShowDelay)
+            {
+                eTimeSinceLastInput = 0f;
+                yield return StartCoroutine(ShowHowToPlayAndWait("좌우 방향키를 번갈아 연타하세요", false));
             }
         }
         SetTimeText(timer);
 
+
+        Time.timeScale = 2;
+        while(finishedOrder.Count != athletes.Length)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            for (int i = 0; i < athletes.Length; i++)
+            {
+                if (athletes[i].CurrentState == AthleteFSM.State.Finish && !isFinished[i])
+                {
+                    isFinished[i] = true;
+                    athletes[i].finishedTime = timer;
+                    finishedOrder.Add(athletes[i]);
+                }
+            }
+
+        }
+        Time.timeScale = 1;
+
         currentState = State.Finish;
-
+        StartCoroutine(Finish());
     }
-
+    IEnumerator Finish()
+    {
+        mainUIs.SetTrigger("Close");
+        yield return new WaitForSeconds(2);
+        resultBoard.SetValues(finishedOrder);
+        resultBoard.gameObject.SetActive(true);
+    }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && currentState == State.Ready)
+        if (Input.GetKeyDown(KeyCode.Space) && isGettingSpaceInput)
         {
-            isTimmerStopped = true;
+            timmingBar.value += valuePerSpaceHit;
         }
         else if(currentState == State.Playing)
         {
@@ -121,11 +165,13 @@ public class SwimGameManager : MonoBehaviour
                 {
                     athletes[playerLane].SwimButtonPressed();
                     inputState = 1;
+                    eTimeSinceLastInput = 0f;
                 }
                 else if ((inputState == 0 || inputState == 1) && Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     athletes[playerLane].SwimButtonPressed();   
                     inputState = 2;
+                    eTimeSinceLastInput = 0f;
                 }
             }
             else 
@@ -133,6 +179,8 @@ public class SwimGameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
                 {
                     athletes[playerLane].SwimButtonPressed();
+
+                    eTimeSinceLastInput = 0f;
                 }
             }
         }
@@ -162,13 +210,34 @@ public class SwimGameManager : MonoBehaviour
     {
         return athletes[playerLane];
     }
-    public void ShowHowToPlay(string text)
+    IEnumerator ShowHowToPlayAndWait(string text, bool isDive)
     {
         howToPlayText.text = text;
-        StartCoroutine(HowToPlayCoroutine());
-    }
-    IEnumerator HowToPlayCoroutine()
-    {
-
+        howToPlayText.transform.parent.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        while(true)
+        {
+            if(isDive)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                    break;
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    inputState = 1;
+                    break;
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    inputState = 2;
+                    break;
+                }
+            }
+        yield return null;
+        }
+        Time.timeScale = 1;
+        howToPlayText.transform.parent.gameObject.SetActive(false);
     }
 }
