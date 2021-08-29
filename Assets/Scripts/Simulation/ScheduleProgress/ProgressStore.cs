@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ProgressStore : MonoBehaviour
 {
     //상점
-    public Button[] FoodArray;
+    public Button[] ItemArray;
     public int currentPage; //현재 페이지
     public GameObject TextView; //텍스트 출력 장소
 
@@ -19,19 +19,32 @@ public class ProgressStore : MonoBehaviour
     public Text BlueText;   //파란색 텍스트(감소)
 
     List<Text> tempList = new List<Text>();
+    List<StoreItemData> itemList = new List<StoreItemData>();
+    StoreItemDatas StoreItemTest;
+    void Awake()
+    {
+        //아이템 리스트
+        //GameData itemData = new GameData();
+
+        StoreItemTest = new StoreItemDatas();
+
+        //itemList = itemData.StoreItem.Datas;
+    }
 
     void Start()
     {
         currentPage = 0;    //현재 페이지: 0
 
         //각 버튼에 구매 함수 추가
-        for (int i = 0; i < FoodArray.Length; i++)
+        for (int i = 0; i < ItemArray.Length; i++)
         {
-            FoodArray[i].onClick.AddListener(BuyFood);
+            ItemArray[i].onClick.AddListener(BuyFood);
         }
 
         UpdateGoldUI();
 
+        //StoreItemData currentItem = returnOneOfStoreItem();
+        Debug.Log(StoreItemTest.Datas[0].Item);
     }
 
     //아이템 구매 함수
@@ -59,6 +72,61 @@ public class ProgressStore : MonoBehaviour
 
         UpdateGoldUI();
     }
+    
+
+    //지정된 번호의 상점 아이템 하나의 정보 반환하기
+    private StoreItemData returnOneOfStoreItem(int index)
+    {
+        return itemList[index];
+    }
+
+    //지정된 번호의 상점 아이템들의 정보 텍스트로 출력하기(높은 수치만)
+    private void printOneOfStoreItem(int index)
+    {
+        //StoreItemData currentItem = new StoreItemData();
+        StoreItemData currentItem = returnOneOfStoreItem(index);
+
+        string result;
+        result = currentItem.Item + "\n";  //아이템 이름
+
+        string[] changedStatName = new string[5];
+        int[] changedStatValue = new int[5];
+        int count = 0;
+
+        if (currentItem.Endurance > 0)
+        {
+            changedStatName[count] += "지구력 ";
+            changedStatValue[count] = currentItem.Endurance;
+            count++;
+        }
+        if (currentItem.Quickness > 0)
+        {
+            changedStatName[count] += "순발력 ";
+            changedStatValue[count] = currentItem.Quickness;
+            count++;
+        }
+        if (currentItem.Strength > 0)
+        {
+            changedStatName[count] += "근력 ";
+            changedStatValue[count] = currentItem.Strength;
+            count++;
+        }
+        if (currentItem.Flexibility > 0)
+        {
+            changedStatName[count] += "유연성 ";
+            changedStatValue[count] = currentItem.Flexibility;
+            count++;
+        }
+        if (currentItem.Stamina > 0)
+        {
+            changedStatName[count] += "체력 ";
+            changedStatValue[count] = currentItem.Stamina;
+            count++;
+        }
+
+    }
+
+
 
     private void UpdateGoldUI()
     {

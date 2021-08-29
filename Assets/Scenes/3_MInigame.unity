@@ -1044,7 +1044,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 822.0532, y: 589.7213}
+  m_SizeDelta: {x: 900, y: 589.7213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &271941191
 MonoBehaviour:
@@ -1960,7 +1960,7 @@ MonoBehaviour:
   readyWaitDuration: 2
   valuePerSpaceHit: 4
   howToPlayShowDelay: 2
-  lastGameTest: 1
+  lastGameTest: 0
 --- !u!114 &572554838
 MonoBehaviour:
   m_ObjectHideFlags: 0

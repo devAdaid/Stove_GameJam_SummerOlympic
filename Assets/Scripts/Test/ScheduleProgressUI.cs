@@ -4,23 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //일정 진행 테스트 코드입니다.
-public class ScheduleProgressTest : MonoBehaviour
+public class ScheduleProgressUI : MonoBehaviour
 {
-    [Header ("Stat Names Text")]
+    [Header("Stat Names Text")]
     public Text staminaText;
     public Text strengthText;
     public Text quicknessText;
     public Text enduranceText;
     public Text flexibilityText;
 
-    [Header ("Stat Values Text")]
+    [Header("Stat Values Text")]
     public Text staminaValue;
     public Text strengthValue;
     public Text quicknessValue;
     public Text enduranceValue;
     public Text flexibilityValue;
 
-    [Header ("Stat Sliders")]
+    [Header("Stat Sliders")]
     public Slider staminaSlider;
     public Slider strengthSlider;
     public Slider quicknessSlider;
@@ -93,11 +93,11 @@ public class ScheduleProgressTest : MonoBehaviour
 
     private void UpdateStatValue()
     {
-        string sta = GetStatValue(StatType.Stamina);
-        string end = GetStatValue(StatType.Endurance);
-        string qui = GetStatValue(StatType.Quickness);
-        string str = GetStatValue(StatType.Strength);
-        string fle = GetStatValue(StatType.Flexibility);
+        var sta = GetStatValue(StatType.Stamina);
+        var end = GetStatValue(StatType.Endurance);
+        var qui = GetStatValue(StatType.Quickness);
+        var str = GetStatValue(StatType.Strength);
+        var fle = GetStatValue(StatType.Flexibility);
 
         staminaValue.text = sta;
         enduranceValue.text = end;

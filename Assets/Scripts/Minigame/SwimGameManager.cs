@@ -258,7 +258,7 @@ public class SwimGameManager : MonoBehaviour
             {
                 PlayerRecord r = new PlayerRecord();
                 if (athletes[i].flagType == 0)
-                    r.nationName = "한국";
+                    r.nationName = "대한민국";
                 if (athletes[i].flagType == 1)
                     r.nationName = "호주";
                 if (athletes[i].flagType == 2)
@@ -266,7 +266,7 @@ public class SwimGameManager : MonoBehaviour
                 if (athletes[i].flagType == 3)
                     r.nationName = "네덜란드";
                 if (athletes[i].flagType == 4)
-                    r.nationName = "남아프리카";
+                    r.nationName = "남아프리카공화국";
                 r.playerName = athletes[i].name;
                 r.record = athletes[i].finishedTime;
                 list.Add(r);
@@ -277,7 +277,20 @@ public class SwimGameManager : MonoBehaviour
         }
         else
         {
-
+            // 상금 지급
+            switch (Rank)
+            {
+                case 1:
+                    Simulation.I.AddGold(250000);
+                    break;
+                case 2:
+                    Simulation.I.AddGold(100000);
+                    break;
+                case 3:
+                    Simulation.I.AddGold(50000);
+                    break;
+            }
+            Simulation.IsMiniGameEnded = true;
             SceneManager.LoadScene("2_Schedule");
         }
         //change scene

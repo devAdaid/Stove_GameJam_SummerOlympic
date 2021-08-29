@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//ÀÏÁ¤ ÁøÇà °úÁ¤À» Å¸ÀÌÇÎÇÏ´Â Å¬·¡½º
+//ì¼ì • ì§„í–‰ ê³¼ì •ì„ íƒ€ì´í•‘í•˜ëŠ” í´ë˜ìŠ¤
 public class ProgressTyping : MonoBehaviour
 {
     [Header("Typing Objects")]
-    public GameObject TextContent;  //ÅØ½ºÆ®¸¦ UI¸¦ »ı¼ºÇÒ À§Ä¡
-    public Text WhiteText;  //Èò»ö ÅØ½ºÆ®(±âº»)
-    public Text RedText;    //»¡°£»ö ÅØ½ºÆ®(Áõ°¡)
-    public Text BlueText;   //ÆÄ¶õ»ö ÅØ½ºÆ®(°¨¼Ò)
+    public GameObject TextContent;  //í…ìŠ¤íŠ¸ë¥¼ UIë¥¼ ìƒì„±í•  ìœ„ì¹˜
+    public Text WhiteText;  //í°ìƒ‰ í…ìŠ¤íŠ¸(ê¸°ë³¸)
+    public Text RedText;    //ë¹¨ê°„ìƒ‰ í…ìŠ¤íŠ¸(ì¦ê°€)
+    public Text BlueText;   //íŒŒë€ìƒ‰ í…ìŠ¤íŠ¸(ê°ì†Œ)
 
     [Header("Typing Speed")]
-    public float TypingSpeed = 0.1f;    //Å¸ÀÌÇÎ ¼Óµµ
-    public bool isSkipped;  //½ºÅµ ¹öÆ°À» ´­·¶´ÂÁö ¿©ºÎ
+    public float TypingSpeed = 0.1f;    //íƒ€ì´í•‘ ì†ë„
+    public bool isSkipped;  //ìŠ¤í‚µ ë²„íŠ¼ì„ ëˆŒë €ëŠ”ì§€ ì—¬ë¶€
     public bool isFinished;
+    public ProgressStat progressStat;
 
-    //ÅØ½ºÆ® ¸®½ºÆ®
-    //ÀÌ ¸®½ºÆ®¿¡ ÀÖ´Â ÅØ½ºÆ®µéÀÌ ¹­À½À¸·Î Ãâ·ÂµÊ(ex. ÀÏÁ¤ ÇÑ ÁÖ ¼³¸í, ¾ÆÀÌÅÛ ÇÏ³ª ¼³¸í µî)
+    //í…ìŠ¤íŠ¸ ë¦¬ìŠ¤íŠ¸
+    //ì´ ë¦¬ìŠ¤íŠ¸ì— ìˆëŠ” í…ìŠ¤íŠ¸ë“¤ì´ ë¬¶ìŒìœ¼ë¡œ ì¶œë ¥ë¨(ex. ì¼ì • í•œ ì£¼ ì„¤ëª…, ì•„ì´í…œ í•˜ë‚˜ ì„¤ëª… ë“±)
     List<Text> sendTextList = new List<Text>();
 
 
     void Start()
     {
-        isSkipped = isFinished = false;  //½ºÅµ ¿©ºÎ ÃÊ±âÈ­
+        isSkipped = isFinished = false;  //ìŠ¤í‚µ ì—¬ë¶€ ì´ˆê¸°í™”
     }
 
-    //ÅØ½ºÆ® Ãâ·Â ½ÇÇà ÇÔ¼ö -> ÀÌ ÇÔ¼ö¿¡ ÅØ½ºÆ® ¸®½ºÆ®¸¦ ³Ö°í È£ÃâÇÏ¸é ÅØ½ºÆ®°¡ Ãâ·ÂµÊ
+    //í…ìŠ¤íŠ¸ ì¶œë ¥ ì‹¤í–‰ í•¨ìˆ˜ -> ì´ í•¨ìˆ˜ì— í…ìŠ¤íŠ¸ ë¦¬ìŠ¤íŠ¸ë¥¼ ë„£ê³  í˜¸ì¶œí•˜ë©´ í…ìŠ¤íŠ¸ê°€ ì¶œë ¥ë¨
     public void SendText(List<Text> textList)
     {
         StartCoroutine(TypingText(textList));
@@ -36,32 +37,35 @@ public class ProgressTyping : MonoBehaviour
 
     public void ProcessSchedule(ProcessScheduleRequestData requestData, string scheduleName, int day)
     {
-        //ÀÏÁ¤À» Áõ°¡½ÃÅ°°í Å¸ÀÌÇÎ ¿¬ÃâÀ» º¸¿©ÁÜ
-        //°¢ »ö±òÀÇ ÅØ½ºÆ®
-        Text whiteText = Instantiate(WhiteText);
-        Text redText = Instantiate(RedText);
-        Text blueText = Instantiate(BlueText);
+        //ì¼ì •ì„ ì¦ê°€ì‹œí‚¤ê³  íƒ€ì´í•‘ ì—°ì¶œì„ ë³´ì—¬ì¤Œ
+        //ê° ìƒ‰ê¹”ì˜ í…ìŠ¤íŠ¸
+        Text whiteText = Instantiate(WhiteText, TextContent.transform);
+        Text redText = Instantiate(RedText, TextContent.transform);
+        Text blueText = Instantiate(BlueText, TextContent.transform);
+        whiteText.gameObject.SetActive(false);
+        redText.gameObject.SetActive(false);
+        blueText.gameObject.SetActive(false);
 
-        //¸®½ºÆ® ÃÊ±âÈ­
+        //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         sendTextList.Clear();
 
-        //ÅØ½ºÆ® ÀÛ¼º
-        whiteText.text = scheduleName + "À» ½ÃÀÛÇß´Ù.";
-        sendTextList.Add(whiteText); //~~ÀÏÁ¤À» ½ÃÀÛÇß´Ù.
+        //í…ìŠ¤íŠ¸ ì‘ì„±
+        whiteText.text = scheduleName + "ì„ ì‹œì‘í–ˆë‹¤.";
+        sendTextList.Add(whiteText); //~~ì¼ì •ì„ ì‹œì‘í–ˆë‹¤.
 
         if (requestData.GoldDiff >= 0)
         {
-            redText.text = "°ñµå " + requestData.GoldDiff;
-            sendTextList.Add(redText); //°ñµå +±İ¾×
+            redText.text = "ê³¨ë“œ " + requestData.GoldDiff;
+            sendTextList.Add(redText); //ê³¨ë“œ +ê¸ˆì•¡
         }
         else
         {
-            blueText.text = "°ñµå " + requestData.GoldDiff;
-            sendTextList.Add(blueText); //°ñµå +±İ¾×
+            blueText.text = "ê³¨ë“œ " + requestData.GoldDiff;
+            sendTextList.Add(blueText); //ê³¨ë“œ +ê¸ˆì•¡
         }
 
-        List<StatChangedInfo> changedStats = requestData.StatChangedInfo;   //ÀÏÁ¤ ¸®½ºÆ®
-        //ÀÏÁ¤ ÇÏ³ªÀÇ ½ºÅÈµé Áõ°¨ ÀúÀå
+        List<StatChangedInfo> changedStats = requestData.StatChangedInfo;   //ì¼ì • ë¦¬ìŠ¤íŠ¸
+        //ì¼ì • í•˜ë‚˜ì˜ ìŠ¤íƒ¯ë“¤ ì¦ê° ì €ì¥
         for (int i = 0; i < changedStats.Count; i++)
         {
             string tempString = changedStats[i].StatType + " " + changedStats[i].DiffValue;
@@ -79,38 +83,55 @@ public class ProgressTyping : MonoBehaviour
             }
         }
 
-        whiteText.text = scheduleName + "À» ¸¶ÃÆ´Ù.";
-        sendTextList.Add(whiteText); //~~ÀÏÁ¤À» ¸¶ÃÆ´Ù.
+        foreach (var change in requestData.StatChangedInfo)
+        {
+            if (change.IsIncreased)
+            {
+                Simulation.I.IncreaseSwimmerStat(change.StatType, change.Value);
+            }
+            else
+            {
+                Simulation.I.DecreaseStamina(change.Value);
+            }
+        }
+        if (requestData.GoldDiff > 0)
+        {
+            Simulation.I.AddGold(requestData.GoldDiff);
+        }
+        else
+        {
+            Simulation.I.DecreaseGold(-requestData.GoldDiff);
+        }
+        progressStat.UpdateUI();
 
 
-        //ÀúÀåÇÑ ÅØ½ºÆ®µé Ãâ·Â(Å¸ÀÌÇÎ ¿¬Ãâ)
+        //ì €ì¥í•œ í…ìŠ¤íŠ¸ë“¤ ì¶œë ¥(íƒ€ì´í•‘ ì—°ì¶œ)
         SendText(sendTextList);
-
-        //ºó ¸Ş¼Òµå
-        NextSchedule();
     }
 
-    //¾Æ¿µ´ÔÀÌ ¿äÃ»ÇÏ½Å ºó ¸Ş¼Òµå
+    //ì•„ì˜ë‹˜ì´ ìš”ì²­í•˜ì‹  ë¹ˆ ë©”ì†Œë“œ
     public void NextSchedule()
     {
-
+        Simulation.I.OnProcessScheduleEnd();
     }
 
-    //ÅØ½ºÆ® ¸®½ºÆ®ÀÇ ÅØ½ºÆ®¸¦ Å¸ÀÌÇÎÇÏ´Â ÄÚ·çÆ¾ ÇÔ¼ö
+    //í…ìŠ¤íŠ¸ ë¦¬ìŠ¤íŠ¸ì˜ í…ìŠ¤íŠ¸ë¥¼ íƒ€ì´í•‘í•˜ëŠ” ì½”ë£¨í‹´ í•¨ìˆ˜
     IEnumerator TypingText(List<Text> textList)
     {
         for (int i = 0; i < textList.Count; i++)
         {
-            //Text Content ÀÚ½Ä ¿ÀºêÁ§Æ®¿¡ »õ ÅØ½ºÆ® »ı¼º, Å¸ÀÌÇÎ ¿¬Ãâ
-            Text newText = Instantiate(textList[i]);
-            newText.transform.SetParent(TextContent.transform, false);
-            yield return StartCoroutine(Typing(newText, textList[i].text, TypingSpeed));
+            //Text Content ìì‹ ì˜¤ë¸Œì íŠ¸ì— ìƒˆ í…ìŠ¤íŠ¸ ìƒì„±, íƒ€ì´í•‘ ì—°ì¶œ
+            textList[i].gameObject.SetActive(true);
+            yield return StartCoroutine(Typing(textList[i], textList[i].text, TypingSpeed));
         }
 
-        isFinished = true;  //Å¸ÀÌÇÎ ³¡³ª¸é true·Î ¼³Á¤
+        isFinished = true;  //íƒ€ì´í•‘ ëë‚˜ë©´ trueë¡œ ì„¤ì •
+
+        //ë¹ˆ ë©”ì†Œë“œ
+        NextSchedule();
     }
 
-    //ÇÑ ¹®ÀåÀ» Å¸ÀÌÇÎÇÏ´Â ÄÚ·çÆ¾ ÇÔ¼ö
+    //í•œ ë¬¸ì¥ì„ íƒ€ì´í•‘í•˜ëŠ” ì½”ë£¨í‹´ í•¨ìˆ˜
     IEnumerator Typing(Text typingText, string message, float speed)
     {
         for (int i = 0; i < message.Length; i++)
@@ -120,31 +141,31 @@ public class ProgressTyping : MonoBehaviour
         }
     }
 
-    //½ºÅµ ¹öÆ° ¿Â¿ÀÇÁ·Î Å¸ÀÌÇÎ ¼Óµµ º¯°æ
+    //ìŠ¤í‚µ ë²„íŠ¼ ì˜¨ì˜¤í”„ë¡œ íƒ€ì´í•‘ ì†ë„ ë³€ê²½
     public void SkipOnOff()
     {
-        if (!isSkipped)  //false¶ó¸é true·Î º¯°æ == ½ºÅµ
+        if (!isSkipped)  //falseë¼ë©´ trueë¡œ ë³€ê²½ == ìŠ¤í‚µ
         {
             isSkipped = true;
-            TypingSpeed = 0.02f;
+            TypingSpeed = 0.001f;
         }
-        else    //true¶ó¸é false·Î º¯°æ == ½ºÅµ ÇØÁ¦
+        else    //trueë¼ë©´ falseë¡œ ë³€ê²½ == ìŠ¤í‚µ í•´ì œ
         {
             isSkipped = false;
             TypingSpeed = 0.1f;
         }
     }
 
-    //¸Ş½ÃÁö ¸ğµÎ »èÁ¦
+    //ë©”ì‹œì§€ ëª¨ë‘ ì‚­ì œ
     public void DeleteText()
     {
-        if (isFinished) //Å¸ÀÌÇÎÀÌ ³¡³µ´Ù¸é
+        if (isFinished) //íƒ€ì´í•‘ì´ ëë‚¬ë‹¤ë©´
         {
-            var childText = TextContent.GetComponentsInChildren<Transform>();  //Text Content¿Í »ı¼ºÇÑ ÅØ½ºÆ®µé
+            var childText = TextContent.GetComponentsInChildren<Transform>();  //Text Contentì™€ ìƒì„±í•œ í…ìŠ¤íŠ¸ë“¤
 
             foreach (var iter in childText)
             {
-                //Text Content´Â »èÁ¦ÇÏÁö ¾ÊÀ½
+                //Text ContentëŠ” ì‚­ì œí•˜ì§€ ì•ŠìŒ
                 if (iter != TextContent.transform)
                 {
                     Destroy(iter.gameObject);

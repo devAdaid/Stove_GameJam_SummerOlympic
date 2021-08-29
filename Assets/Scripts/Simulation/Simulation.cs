@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Simulation : Singleton<Simulation>
 {
@@ -10,10 +11,13 @@ public class Simulation : Singleton<Simulation>
     public int Gold { get; private set; }
     public int Day = 0;
     private ScheduleType[] _selectedSchedules;
-
+    public static bool IsMiniGameEnded = false;
+    private ProcessScheduleRequestData _requestData = null;
+    private string _scheduleName = string.Empty;
     public Simulation()
     {
         Swimmer = new SwimmerCharacter();
+        Gold = Constant.GOLD_DELIVERED_AT_MONTH;
         PassedMonth = 0;
         Day = 0;
         _selectedSchedules = null;
@@ -76,16 +80,32 @@ public class Simulation : Singleton<Simulation>
 
     public void DecreaseStamina(int value)
     {
+        Debug.Log($"Swimmer.GetStat(StatType.Stamina) / {value}");
         Swimmer.DecreaseStat(StatType.Stamina, value);
+    }
+
+    public void OnScheduleScene()
+    {
+        if (IsMiniGameEnded)
+        {
+            IsMiniGameEnded = false;
+            OnMiniGameEnd();
+        }
     }
 
     public void StartSchedule(ScheduleType[] selectedSchedules)
     {
         Day = 1;
+        _selectedSchedules = new ScheduleType[Constant.WEEK_PER_MONTH_COUNT];
+        for (int i = 0; i < Constant.WEEK_PER_MONTH_COUNT; i++)
+        {
+            _selectedSchedules[i] = selectedSchedules[i];
+        }
+
         CheckAndProcessSchedule();
     }
 
-    public void OnEndProcessSchedule()
+    public void OnProcessScheduleEnd()
     {
         Day += 1;
         CheckAndProcessSchedule();
@@ -93,7 +113,8 @@ public class Simulation : Singleton<Simulation>
 
     public void OnMiniGameEnd()
     {
-        // TODO: 미니게임
+        Day += Constant.DAY_PER_WEEK_COUNT;
+        CheckAndProcessSchedule();
     }
 
     private void CheckAndProcessSchedule()
@@ -103,6 +124,10 @@ public class Simulation : Singleton<Simulation>
             // 다음 달로 진행한다.
             PassedMonth += 1;
             Day = 0;
+            Gold += Constant.GOLD_DELIVERED_AT_MONTH;
+            IncreaseSwimmerStat(StatType.Stamina, Constant.STAMINA_DELIVERED_AT_MONTH);
+            SchedueProgressRoot.I.SetActive(false);
+            ScheduleSelectUI.I.ResetSchedule();
         }
         else
         {
@@ -119,16 +144,37 @@ public class Simulation : Singleton<Simulation>
         // 경기일 경우 미니게임 플레이, 플레이 이후 7일 건너뛸것
         if (scheduleType == ScheduleType.Match)
         {
-            // TODO: 미니게임 연출
+            var month = GetMonth();
+            SwimGameManager.SwimmerIndicies = GameData.I.AIStat.GetSwimmerIndices(month);
+
+            if (month == 7)
+            {
+                SwimGameManager.isLastGame = true;
+            }
+
+            SceneManager.LoadScene("3_Minigame");
         }
         // 아닐 경우 일반 일정을 진행.
         else
         {
-            var scheduleData = GameData.I.Schedule.GetData(scheduleType);
-            var requestData = MakeProcessRequestData(scheduleData);
-            //진주님_클래스.ProcessSchedule(requestData, scheduleData.DisplayName, Day);
+            ScheduleData scheduleData = null;
+            if (Swimmer.GetStat(StatType.Stamina) > 0
+                || scheduleType == ScheduleType.Rest)
+            {
+                scheduleData = GameData.I.Schedule.GetData(scheduleType);
+            }
+            else
+            {
+                scheduleData = GameData.I.Schedule.GetData(ScheduleType.Rest_Forced);
+            }
+            _requestData = MakeProcessRequestData(scheduleData);
+            _scheduleName = scheduleData.DisplayName;
+
+            SchedueProgressRoot.I.SetActive(true);
+            SchedueProgressRoot.I.Progress.ProcessSchedule(_requestData, _scheduleName, Day);
         }
     }
+
     private ProcessScheduleRequestData MakeProcessRequestData(ScheduleData scheduleData)
     {
         Dictionary<StatType, int> statChanges = new Dictionary<StatType, int>();
@@ -204,6 +250,16 @@ public class Simulation : Singleton<Simulation>
         var stepCount = ((maxValue - minValue) / stepValue) + 1;
         var randomStep = Random.Range(0, stepCount);
         return minValue + randomStep * stepValue;
+    }
+
+    private FixedScheduleData GetMatchData()
+    {
+        var month = GetMonth();
+        if (GameData.I.FixedSchedule.TryGetData(month, out var data))
+        {
+            return data;
+        }
+        return null;
     }
 
     public void TempDoSchedule(ScheduleType[] schedules)

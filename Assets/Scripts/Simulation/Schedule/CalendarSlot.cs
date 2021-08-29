@@ -28,7 +28,7 @@ public class CalendarSlot : MonoBehaviour
             var scheduleType = selectedSchedules[s];
             if (scheduleType == ScheduleType.Match)
             {
-                var iconSprite = GetFixedSchedule().IconSprite;
+                var iconSprite = Resources.Load<Sprite>("Sprites/ScheduleIcon/Match");
                 _weekEntries[i].SetScheduleIcon(iconSprite);
             }
             else if (scheduleType != ScheduleType.Invalid)

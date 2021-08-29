@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AIStatData
@@ -32,6 +33,7 @@ public class AIStatData
 public class AIStatDatas
 {
     public List<AIStatData> Datas { get { return datas; } }
+    private Dictionary<int, List<AIStatData>> _pairs = new Dictionary<int, List<AIStatData>>();
     List<AIStatData> datas = new List<AIStatData>();
     public AIStatDatas()
     {
@@ -62,6 +64,22 @@ public class AIStatDatas
             int diveStat = (int)line["StartGame"];
             AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility, tapSpeed, flagType, diveStat);
             datas.Add(data);
+
+            var month = (int)line["Month"];
+            if (!_pairs.TryGetValue(month, out var list))
+            {
+                list = new List<AIStatData>();
+                _pairs.Add(month, list);
+            }
+            list.Add(data);
+            index += 1;
         }
+    }
+
+    public int[] GetSwimmerIndices(int month)
+    {
+        var data = _pairs[month].Select(data => data.Index).ToArray();
+        Debug.Log(data.Select(d => d.ToString()).Aggregate((x, y) => $"{x}, {y}"));
+        return data;
     }
 }

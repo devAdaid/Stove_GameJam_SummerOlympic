@@ -17,11 +17,11 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     private Transform _scheduleButtonRoot;
     [SerializeField]
     private ScheduleButtonEntry _scheduleButtonPrefab;
+    [SerializeField]
     private ScheduleType[] _selectedSchedules = new ScheduleType[Constant.WEEK_PER_MONTH_COUNT];
     private int _currentScheduleIndex = 0;
     private List<ScheduleButtonEntry> _scheduleButtonEntries = new List<ScheduleButtonEntry>();
     private int _goldPreview => Simulation.I.Gold - GetTotalGoldCost();
-    private int _staminaPreview => Simulation.I.Swimmer.GetStat(StatType.Stamina) - GetTotalStamina();
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         UpdateUI();
     }
 
-    public void TempDoSchedule()
+    public void StartSchedule()
     {
         if (Simulation.I.IsGameEnded)
         {
@@ -91,11 +91,11 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             return;
         }
 
-        Simulation.I.TempDoSchedule(_selectedSchedules);
+        Simulation.I.StartSchedule(_selectedSchedules);
         ResetSchedule();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         if (Simulation.I.IsGameEnded)
         {
@@ -107,14 +107,13 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         }
         _swimmerInfo.UpdateSlot();
         _calendarSlot.SetCalender(_selectedSchedules);
-        _costPreviewSlot.SetCostPreview(_goldPreview, _staminaPreview);
+        _costPreviewSlot.SetCostPreview(_goldPreview, Simulation.I.Swimmer.GetStat(StatType.Stamina));
         SetScheduleButtons();
     }
 
     private void SetScheduleButtons()
     {
         var scheduleDatas = GameData.I.Schedule.SelectableDatas;
-        bool isSteminaZero = _staminaPreview <= 0;
         for (int i = 0; i < scheduleDatas.Count; i++)
         {
             var data = scheduleDatas[i];
@@ -133,19 +132,6 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             }
         }
         return gold;
-    }
-
-    private int GetTotalStamina()
-    {
-        int stamina = 0;
-        for (int i = 0; i < _currentScheduleIndex; i++)
-        {
-            if (_selectedSchedules[i] != ScheduleType.Match)
-            {
-                stamina += GameData.I.Schedule.GetData(_selectedSchedules[i]).StaminaCost * Constant.DAY_PER_WEEK_COUNT;
-            }
-        }
-        return stamina;
     }
 
     private void CheckFixedAndMoveIndex()
