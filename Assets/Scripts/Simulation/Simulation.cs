@@ -80,7 +80,6 @@ public class Simulation : Singleton<Simulation>
 
     public void DecreaseStamina(int value)
     {
-        Debug.Log($"Swimmer.GetStat(StatType.Stamina) / {value}");
         Swimmer.DecreaseStat(StatType.Stamina, value);
     }
 

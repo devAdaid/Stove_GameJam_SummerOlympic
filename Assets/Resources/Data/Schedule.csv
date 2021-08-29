@@ -3,8 +3,8 @@ Order,DisplayName,ScheduleType,IconSpriteName,GoldCost,StaminaCost,RewardType0,R
 2,산악구보,Training_Quickness,Training_Quickness,3000,10,유연성,지구력,3,7,1
 3,웨이트트레이닝,Training_Flexibility,Training_Flexibility,3500,10,지구력,근력,3,7,1
 4,멀리뛰기,Training_Endurance,Training_Endurance,2000,10,순발력,유연성,3,7,1
-5,체육관관리,PartTime_Normal,PartTime_Normal,0,20,골드,,7000,20000,1000
-6,수영학원강사,PartTime_Hard,PartTime_Hard,0,40,골드,,15000,30000,1000
+5,체육관관리,PartTime_Normal,PartTime_Normal,0,20,골드,,5000,9000,1000
+6,수영학원강사,PartTime_Hard,PartTime_Hard,0,40,골드,,10000,18000,1000
 7,휴식,Rest,Rest,0,0,체력,,20,50,10
 9,강제 휴식,Rest_Forced,Rest_Forced,0,0,체력,,5,30,5
 8,모의 경기,TrialMatch,TrialMatch,40000,60,전체 수영스탯,,1,3,1

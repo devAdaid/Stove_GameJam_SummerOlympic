@@ -24,8 +24,8 @@ public class NationDatas : Singleton<NationDatas>
         var parsedDatas = CSVParser.ReadFromFile(ResourcePath.NATION_DATA);
         foreach (var line in parsedDatas)
         {
-            var nationName = (string)line["±Ή°΅Έν"];
-            var flagSpriteName = (string)line["Έ®ΌÒ½ΊΈν"];
+            var nationName = (string)line["κµ­κ°€λª…"];
+            var flagSpriteName = (string)line["λ¦¬μ†μ¤λª…"];
             var flagSprite = Resources.Load<Sprite>(Path.Combine(ResourcePath.FLAG_ICON_SPRITE, flagSpriteName));
             NationData data = new NationData(nationName, flagSprite);
 

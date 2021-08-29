@@ -281,13 +281,13 @@ public class SwimGameManager : MonoBehaviour
             switch (Rank)
             {
                 case 1:
-                    Simulation.I.AddGold(250000);
+                    Simulation.I.AddGold(60000);
                     break;
                 case 2:
-                    Simulation.I.AddGold(100000);
+                    Simulation.I.AddGold(40000);
                     break;
                 case 3:
-                    Simulation.I.AddGold(50000);
+                    Simulation.I.AddGold(20000);
                     break;
             }
             Simulation.IsMiniGameEnded = true;
