@@ -17,6 +17,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
     private Transform _scheduleButtonRoot;
     [SerializeField]
     private ScheduleButtonEntry _scheduleButtonPrefab;
+    [SerializeField]
     private ScheduleType[] _selectedSchedules = new ScheduleType[Constant.WEEK_PER_MONTH_COUNT];
     private int _currentScheduleIndex = 0;
     private List<ScheduleButtonEntry> _scheduleButtonEntries = new List<ScheduleButtonEntry>();
@@ -79,7 +80,7 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         UpdateUI();
     }
 
-    public void TempDoSchedule()
+    public void StartSchedule()
     {
         if (Simulation.I.IsGameEnded)
         {
@@ -91,11 +92,11 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
             return;
         }
 
-        Simulation.I.TempDoSchedule(_selectedSchedules);
+        Simulation.I.StartSchedule(_selectedSchedules);
         ResetSchedule();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         if (Simulation.I.IsGameEnded)
         {

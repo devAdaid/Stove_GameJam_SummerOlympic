@@ -277,7 +277,19 @@ public class SwimGameManager : MonoBehaviour
         }
         else
         {
-
+            // 상금 지급
+            switch (Rank)
+            {
+                case 1:
+                    Simulation.I.AddGold(250000);
+                    break;
+                case 2:
+                    Simulation.I.AddGold(100000);
+                    break;
+                case 3:
+                    Simulation.I.AddGold(50000);
+                    break;
+            }
             SceneManager.LoadScene("2_Schedule");
         }
         //change scene

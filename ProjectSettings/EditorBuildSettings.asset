@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/2_Schedule.unity
     guid: e38de818b1bf04f62ac8aae1ace8e64d
+  - enabled: 1
+    path: Assets/Scenes/3_MInigame.unity
+    guid: a797dc8d6e308ea46ab7b79414b8c98d
+  - enabled: 1
+    path: Assets/Scenes/4_ScheduleProgress.unity
+    guid: 0f3c2110e6302514aad3e7c2e36ad54d
   m_configObjects: {}
