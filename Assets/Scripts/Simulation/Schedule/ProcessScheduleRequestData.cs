@@ -3,10 +3,16 @@ using System.Collections.Generic;
 
 public class StatChangedInfo
 {
-    public StatType StatType;
-    public int DiffValue;
+    public readonly StatType StatType;
+    public readonly int DiffValue;
     public int Value => Math.Abs(DiffValue);
     public bool IsIncreased => DiffValue > 0;
+
+    public StatChangedInfo(StatType statType, int diffValue)
+    {
+        StatType = statType;
+        DiffValue = diffValue;
+    }
 }
 
 public class ProcessScheduleRequestData
@@ -20,4 +26,3 @@ public class ProcessScheduleRequestData
         GoldDiff = goldDiff;
     }
 }
-

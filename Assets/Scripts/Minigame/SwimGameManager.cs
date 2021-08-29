@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SwimGameManager : MonoBehaviour
 {
     public static float BestRecord = -1f;
     public static int Rank = 0;
-    public static int[] SwimmerIndicies;
+    public static int[] SwimmerIndicies = { 0, 1, 2, 3 };
     public static bool isLastGame = false;
     [Header("References")]
     [SerializeField] SwimStatManager statManager;
@@ -60,7 +60,7 @@ public class SwimGameManager : MonoBehaviour
         timmingBar.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(ShowHowToPlayAndWait("스페이스바를 연타하세요!", true));
-        
+
         isGettingSpaceInput = true;
         yield return StartCoroutine(countDown.StartCountDown(1));
         mainUIs.SetTrigger("Open");
@@ -68,9 +68,9 @@ public class SwimGameManager : MonoBehaviour
 
         timmingBar.GetComponent<Animator>().SetTrigger("Close");
 
-        for(int i=0; i<athletes.Length; i++)
+        for (int i = 0; i < athletes.Length; i++)
         {
-            if(i == playerLane)
+            if (i == playerLane)
                 athletes[playerLane].StartDive(timmingBar.value);
             else
                 athletes[i].StartDive(athletes[i].diveStat);
@@ -96,7 +96,7 @@ public class SwimGameManager : MonoBehaviour
                 float realX = athletes[i].transform.position.x + (athletes[i].transform.position.y - athletes[playerLane].transform.position.y) * 2;
                 if (realX >= athletes[playerLane].transform.position.x)
                     rank++;
-                if(athletes[i].CurrentState == AthleteFSM.State.Finish && !isFinished[i])
+                if (athletes[i].CurrentState == AthleteFSM.State.Finish && !isFinished[i])
                 {
                     isFinished[i] = true;
                     athletes[i].finishedTime = timer;
@@ -108,7 +108,7 @@ public class SwimGameManager : MonoBehaviour
             SetSpeedText(athletes[playerLane].CurrentSpeed);
 
             yield return null;
-            if(athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
+            if (athletes[playerLane].CurrentState == AthleteFSM.State.Finish)
             {
                 //���� ������ ����Ʈ
                 if (BestRecord == -1 || BestRecord > timer)
@@ -127,7 +127,7 @@ public class SwimGameManager : MonoBehaviour
 
 
         Time.timeScale = 2;
-        while(finishedOrder.Count != athletes.Length)
+        while (finishedOrder.Count != athletes.Length)
         {
             yield return null;
             timer += Time.deltaTime;
@@ -160,9 +160,9 @@ public class SwimGameManager : MonoBehaviour
         {
             timmingBar.value += valuePerSpaceHit;
         }
-        else if(currentState == State.Playing)
+        else if (currentState == State.Playing)
         {
-            if(athletes[playerLane].CurrentState == AthleteFSM.State.Swimming)
+            if (athletes[playerLane].CurrentState == AthleteFSM.State.Swimming)
             {
                 if ((inputState == 0 || inputState == 2) && Input.GetKeyDown(KeyCode.LeftArrow))
                 {
@@ -172,14 +172,14 @@ public class SwimGameManager : MonoBehaviour
                 }
                 else if ((inputState == 0 || inputState == 1) && Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    athletes[playerLane].SwimButtonPressed();   
+                    athletes[playerLane].SwimButtonPressed();
                     inputState = 2;
                     eTimeSinceLastInput = 0f;
                 }
             }
-            else 
+            else
             {
-            if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     athletes[playerLane].SwimButtonPressed();
 
@@ -206,7 +206,7 @@ public class SwimGameManager : MonoBehaviour
     }
     void SetTimeText(float eTime)
     {
-        timeText.text = ((int)eTime/60).ToString().PadLeft(2,'0') + ":"
+        timeText.text = ((int)eTime / 60).ToString().PadLeft(2, '0') + ":"
             + string.Format("{0:00.00}", (eTime % 60));
     }
     public AthleteFSM GetPlayer()
@@ -218,9 +218,9 @@ public class SwimGameManager : MonoBehaviour
         howToPlayText.text = text;
         howToPlayText.transform.parent.gameObject.SetActive(true);
         Time.timeScale = 0f;
-        while(true)
+        while (true)
         {
-            if(isDive)
+            if (isDive)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                     break;
@@ -238,7 +238,7 @@ public class SwimGameManager : MonoBehaviour
                     break;
                 }
             }
-        yield return null;
+            yield return null;
         }
         Time.timeScale = 1;
         howToPlayText.transform.parent.gameObject.SetActive(false);
