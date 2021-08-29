@@ -290,6 +290,7 @@ public class SwimGameManager : MonoBehaviour
                     Simulation.I.AddGold(50000);
                     break;
             }
+            Simulation.IsMiniGameEnded = true;
             SceneManager.LoadScene("2_Schedule");
         }
         //change scene

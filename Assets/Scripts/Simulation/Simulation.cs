@@ -154,7 +154,8 @@ public class Simulation : Singleton<Simulation>
         else
         {
             ScheduleData scheduleData = null;
-            if (Swimmer.GetStat(StatType.Stamina) > 0)
+            if (Swimmer.GetStat(StatType.Stamina) > 0
+                || scheduleType == ScheduleType.Rest)
             {
                 scheduleData = GameData.I.Schedule.GetData(scheduleType);
             }

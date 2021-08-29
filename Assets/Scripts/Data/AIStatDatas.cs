@@ -72,11 +72,14 @@ public class AIStatDatas
                 _pairs.Add(month, list);
             }
             list.Add(data);
+            index += 1;
         }
     }
 
     public int[] GetSwimmerIndices(int month)
     {
-        return _pairs[month].Select(data => data.Index).ToArray();
+        var data = _pairs[month].Select(data => data.Index).ToArray();
+        Debug.Log(data.Select(d => d.ToString()).Aggregate((x, y) => $"{x}, {y}"));
+        return data;
     }
 }

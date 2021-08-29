@@ -1956,7 +1956,7 @@ MonoBehaviour:
   readyWaitDuration: 2
   valuePerSpaceHit: 4
   howToPlayShowDelay: 2
-  lastGameTest: 1
+  lastGameTest: 0
 --- !u!114 &572554838
 MonoBehaviour:
   m_ObjectHideFlags: 0
