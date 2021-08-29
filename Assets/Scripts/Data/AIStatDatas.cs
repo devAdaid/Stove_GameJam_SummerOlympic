@@ -10,10 +10,12 @@ public class AIStatData
     public readonly int Quickness;
     public readonly int Strength;
     public readonly int Flexibility;
-    public readonly int[] TapSpeeds;
-    public AIStatData(int index, string name,
+    public readonly int [] TapSpeeds;
+    public readonly int FlagType;
+    public readonly int DiveStat;
+    public AIStatData( int index, string name,
         int endurance, int quickness,
-        int strength, int flexibility, int[] tapSpeeds)
+        int strength, int flexibility, int[] tapSpeeds, int flagType, int diveStat)
     {
         Index = index;
         Name = name;
@@ -22,6 +24,8 @@ public class AIStatData
         Strength = strength;
         Flexibility = flexibility;
         TapSpeeds = tapSpeeds;
+        FlagType = flagType;
+        DiveStat = diveStat;
     }
 }
 
@@ -35,17 +39,28 @@ public class AIStatDatas
         int index = 0;
         foreach (var line in parsedDatas)
         {
-            string name = (string)line["ì´ë¦„"];
-            int endurance = (int)line["ì‹¬íì§€êµ¬ë ¥"];
-            int quickness = (int)line["ìˆœë°œë ¥"];
-            int strength = (int)line["ê·¼ë ¥"];
-            int flexibility = (int)line["ìœ ì—°ì„±"];
+            string name = (string)line["ÀÌ¸§"];
+            int endurance = (int)line["Áö±¸·Â"];
+            int quickness = (int)line["¼ø¹ß·Â"];
+            int strength = (int)line["±Ù·Â"];
+            int flexibility = (int)line["À¯¿¬¼º"];
             int[] tapSpeed = new int[4];
-            tapSpeed[0] = (int)line["ìŠ¤íƒ€íŠ¸ê²Œì„"];
+            tapSpeed[0] = (int)line["½ºÅ¸Æ®°ÔÀÓ"];
             tapSpeed[1] = (int)line["25-50"];
             tapSpeed[2] = (int)line["50-75"];
             tapSpeed[3] = (int)line["75-100"];
-            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility, tapSpeed);
+            int flagType = 0;
+            string country = (string)line["±¹°¡"];
+            if (country == "È£ÁÖ")
+                flagType = 1;
+            else if (country == "ÀÏº»")
+                flagType = 2;
+            else if (country == "³×´ú¶õµå")
+                flagType = 3;
+            else if (country == "³²¾ÆÇÁ¸®Ä«")
+                flagType = 4;
+            int diveStat = (int)line["½ºÅ¸Æ®°ÔÀÓ"];
+            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility,tapSpeed, flagType, diveStat );
             datas.Add(data);
         }
     }
