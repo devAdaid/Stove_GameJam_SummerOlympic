@@ -123,7 +123,7 @@ public class Simulation : Singleton<Simulation>
             PassedMonth += 1;
             Day = 0;
             SchedueProgressRoot.I.SetActive(false);
-            ScheduleSelectUI.I.UpdateUI();
+            ScheduleSelectUI.I.ResetSchedule();
         }
         else
         {

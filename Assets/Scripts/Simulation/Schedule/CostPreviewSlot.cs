@@ -15,6 +15,6 @@ public class CostPreviewSlot : MonoBehaviour
         if (staminaPreview < 0) staminaPreview = 0;
 
         _goldCostText.text = goldPreview.ToString();
-        _staminaCostText.text = staminaPreview.ToString();
+        _staminaCostText.text = $"{staminaPreview}/{Constant.STAMINA_MAX}";
     }
 }
