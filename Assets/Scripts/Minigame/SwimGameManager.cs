@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SwimGameManager : MonoBehaviour
 {
     public static float BestRecord = -1f;
-    public static float Rank = 0f;
+    public static int Rank = 0;
     public static int[] SwimmerIndicies;
     public static bool isLastGame = false;
     [Header("References")]
@@ -30,6 +30,7 @@ public class SwimGameManager : MonoBehaviour
     [SerializeField] float readyWaitDuration;
     [SerializeField] float valuePerSpaceHit;
     [SerializeField] float howToPlayShowDelay;
+    [SerializeField] bool lastGameTest;
 
 
     List<AthleteFSM> finishedOrder = new List<AthleteFSM>();
@@ -250,7 +251,7 @@ public class SwimGameManager : MonoBehaviour
     {
         resultBoard.Close();
         yield return new WaitForSeconds(1.3f);
-        if (isLastGame)
+        if (isLastGame || lastGameTest)
         {
             List<PlayerRecord> list = new List<PlayerRecord>();
             for (int i = 0; i < 5; i++)
