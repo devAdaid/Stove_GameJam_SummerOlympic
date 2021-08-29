@@ -36,7 +36,9 @@ public class UIEndingView : UIView
 
         bool isPlayerNoAward = true;
 
-        if (isPlayerNoAward)
+        int playerRank = OlympicRecordData.I.playerRecords.FindIndex(x => x.playerName == Simulation.I.Swimmer.Name);
+
+        if (playerRank >= 3)
         {
             rankPlayerBars[3].gameObject.SetActive(true);
             rankPlayerBars[3].UpdateUI("Test", "¥Î«—πŒ±π");
