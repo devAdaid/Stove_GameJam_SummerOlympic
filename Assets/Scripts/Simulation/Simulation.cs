@@ -80,6 +80,7 @@ public class Simulation : Singleton<Simulation>
 
     public void DecreaseStamina(int value)
     {
+        Debug.Log($"Swimmer.GetStat(StatType.Stamina) / {value}");
         Swimmer.DecreaseStat(StatType.Stamina, value);
     }
 
@@ -124,6 +125,7 @@ public class Simulation : Singleton<Simulation>
             PassedMonth += 1;
             Day = 0;
             Gold += Constant.GOLD_DELIVERED_AT_MONTH;
+            IncreaseSwimmerStat(StatType.Stamina, Constant.STAMINA_DELIVERED_AT_MONTH);
             SchedueProgressRoot.I.SetActive(false);
             ScheduleSelectUI.I.ResetSchedule();
         }

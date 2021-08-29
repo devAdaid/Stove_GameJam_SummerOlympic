@@ -100,7 +100,7 @@ public class ProgressTyping : MonoBehaviour
         }
         else
         {
-            Simulation.I.DecreaseStamina(-requestData.GoldDiff);
+            Simulation.I.DecreaseGold(-requestData.GoldDiff);
         }
         progressStat.UpdateUI();
 

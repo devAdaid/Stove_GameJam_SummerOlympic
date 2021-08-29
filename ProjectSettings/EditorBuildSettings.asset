@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/4_ScheduleProgress.unity
     guid: 0f3c2110e6302514aad3e7c2e36ad54d
+  - enabled: 1
+    path: Assets/Scenes/5_Ending.unity
+    guid: 8538941373520b244bdc8dc7909a201d
   m_configObjects: {}
