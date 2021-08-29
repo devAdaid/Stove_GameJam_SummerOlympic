@@ -39,9 +39,12 @@ public class ProgressTyping : MonoBehaviour
     {
         //일정을 증가시키고 타이핑 연출을 보여줌
         //각 색깔의 텍스트
-        Text whiteText = Instantiate(WhiteText);
-        Text redText = Instantiate(RedText);
-        Text blueText = Instantiate(BlueText);
+        Text whiteText = Instantiate(WhiteText, TextContent.transform);
+        Text redText = Instantiate(RedText, TextContent.transform);
+        Text blueText = Instantiate(BlueText, TextContent.transform);
+        whiteText.gameObject.SetActive(false);
+        redText.gameObject.SetActive(false);
+        blueText.gameObject.SetActive(false);
 
         //리스트 초기화
         sendTextList.Clear();
@@ -118,9 +121,8 @@ public class ProgressTyping : MonoBehaviour
         for (int i = 0; i < textList.Count; i++)
         {
             //Text Content 자식 오브젝트에 새 텍스트 생성, 타이핑 연출
-            Text newText = Instantiate(textList[i]);
-            newText.transform.SetParent(TextContent.transform, false);
-            yield return StartCoroutine(Typing(newText, textList[i].text, TypingSpeed));
+            textList[i].gameObject.SetActive(true);
+            yield return StartCoroutine(Typing(textList[i], textList[i].text, TypingSpeed));
         }
 
         isFinished = true;  //타이핑 끝나면 true로 설정

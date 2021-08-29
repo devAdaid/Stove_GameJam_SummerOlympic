@@ -153,7 +153,15 @@ public class Simulation : Singleton<Simulation>
         // 아닐 경우 일반 일정을 진행.
         else
         {
-            var scheduleData = GameData.I.Schedule.GetData(scheduleType);
+            ScheduleData scheduleData = null;
+            if (Swimmer.GetStat(StatType.Stamina) > 0)
+            {
+                scheduleData = GameData.I.Schedule.GetData(scheduleType);
+            }
+            else
+            {
+                scheduleData = GameData.I.Schedule.GetData(ScheduleType.Rest_Forced);
+            }
             _requestData = MakeProcessRequestData(scheduleData);
             _scheduleName = scheduleData.DisplayName;
 
