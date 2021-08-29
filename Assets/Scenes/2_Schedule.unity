@@ -1391,6 +1391,7 @@ GameObject:
   - component: {fileID: 924811907}
   - component: {fileID: 924811906}
   - component: {fileID: 924811905}
+  - component: {fileID: 924811908}
   m_Layer: 5
   m_Name: Button_ResetSchedule
   m_TagString: Untagged
@@ -1474,6 +1475,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 924811908}
+        m_TargetAssemblyTypeName: SoundUtil, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &924811906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,6 +1525,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924811903}
   m_CullTransparentMesh: 1
+--- !u!114 &924811908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924811903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce70bba0525543919750629399e0eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SfxType: 0
 --- !u!1 &936903018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,6 +3020,7 @@ GameObject:
   - component: {fileID: 1905005574}
   - component: {fileID: 1905005573}
   - component: {fileID: 1905005572}
+  - component: {fileID: 1905005575}
   m_Layer: 5
   m_Name: Button_DoSchedule
   m_TagString: Untagged
@@ -3077,6 +3104,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 924811908}
+        m_TargetAssemblyTypeName: SoundUtil, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1905005573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3115,6 +3154,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905005570}
   m_CullTransparentMesh: 1
+--- !u!114 &1905005575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905005570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce70bba0525543919750629399e0eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SfxType: 0
 --- !u!1001 &1908278160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7758,6 +7810,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7267386508263586475}
+        m_TargetAssemblyTypeName: SoundUtil, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &7267386508263586473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7790,6 +7854,7 @@ GameObject:
   - component: {fileID: 7267386508263586478}
   - component: {fileID: 7267386508263586479}
   - component: {fileID: 7267386508263586472}
+  - component: {fileID: 7267386508263586475}
   m_Layer: 5
   m_Name: Skip
   m_TagString: Untagged
@@ -7797,6 +7862,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7267386508263586475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267386508263586474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce70bba0525543919750629399e0eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SfxType: 0
 --- !u!222 &7267386508263586478
 CanvasRenderer:
   m_ObjectHideFlags: 0

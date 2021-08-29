@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8932138392331959907}
   - component: {fileID: 8932138392331959906}
   - component: {fileID: 5035245156970488199}
+  - component: {fileID: 5916279163506903172}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -209,6 +210,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5916279163506903172}
+        m_TargetAssemblyTypeName: SoundUtil, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &5035245156970488199
 Animator:
   serializedVersion: 3
@@ -228,6 +241,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5916279163506903172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932138392331959900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce70bba0525543919750629399e0eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SfxType: 0
 --- !u!1 &8932138392544691280
 GameObject:
   m_ObjectHideFlags: 0

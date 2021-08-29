@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 1240111361797081503}
   - component: {fileID: 5825440292127821353}
   - component: {fileID: 1402309292969767920}
+  - component: {fileID: 6050059327609409018}
   m_Layer: 5
   m_Name: Entry_ScheduleButton
   m_TagString: Untagged
@@ -189,6 +190,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6050059327609409018}
+        m_TargetAssemblyTypeName: SoundUtil, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6050059327609409018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444087802369756438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce70bba0525543919750629399e0eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SfxType: 0
 --- !u!1 &4378293999852174038
 GameObject:
   m_ObjectHideFlags: 0

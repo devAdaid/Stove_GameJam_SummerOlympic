@@ -27,7 +27,7 @@ public class UIEndingView : UIView
         }
 #endif
 
-        for(int i = 0; i < rankPlayerBars.Length; i++)
+        for (int i = 0; i < rankPlayerBars.Length; i++)
         {
             var playerName = OlympicRecordData.I.playerRecords[i].playerName;
             var nationName = OlympicRecordData.I.playerRecords[i].nationName;
@@ -41,7 +41,8 @@ public class UIEndingView : UIView
         if (playerRank >= 3)
         {
             rankPlayerBars[3].gameObject.SetActive(true);
-            rankPlayerBars[3].UpdateUI("Test", "´ëÇÑ¹Î±¹");
+            rankPlayerBars[3].UpdateUI(Simulation.I.Swimmer.Name, "ëŒ€í•œë¯¼êµ­");
+            AudioManager.I.PlaySfx(SfxType.Success);
         }
     }
 
