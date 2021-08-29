@@ -396,7 +396,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 1}
+  m_Size: {x: 0.49, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &55072319
 Transform:
@@ -406,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55072317}
   m_LocalRotation: {x: 0, y: 0, z: 0.5257311, w: 0.85065085}
-  m_LocalPosition: {x: 12.169, y: 5.868, z: 0}
+  m_LocalPosition: {x: 12.295, y: 5.971, z: 0}
   m_LocalScale: {x: 1, y: 4.88, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1460,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Athlete (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2639881758547769151, guid: 8c27e98594153194880cc72454667db9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c27e98594153194880cc72454667db9, type: 3}
 --- !u!1 &377924978
@@ -1993,7 +1997,7 @@ MonoBehaviour:
   defaultStrength: 1.2
   a_flexibility: 0.002
   defaultFlexibility: 0.2
-  test: 0
+  test: 1
   endurance: 350
   quickness: 350
   strength: 350
@@ -4307,6 +4311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Athlete (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2639881758547769151, guid: 8c27e98594153194880cc72454667db9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c27e98594153194880cc72454667db9, type: 3}
 --- !u!114 &1602778898 stripped
@@ -4532,6 +4540,10 @@ PrefabInstance:
     - target: {fileID: 2639881758547769149, guid: 8c27e98594153194880cc72454667db9, type: 3}
       propertyPath: m_Name
       value: Athlete (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639881758547769151, guid: 8c27e98594153194880cc72454667db9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c27e98594153194880cc72454667db9, type: 3}
@@ -5474,7 +5486,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 1}
+  m_Size: {x: 0.94, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1900312227
 Transform:
@@ -5818,7 +5830,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 1}
+  m_Size: {x: 0.94, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1989694958
 Transform:
@@ -5897,7 +5909,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 1}
+  m_Size: {x: 0.94, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &2004406462
 Transform:
@@ -6105,6 +6117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Athlete (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2639881758547769151, guid: 8c27e98594153194880cc72454667db9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c27e98594153194880cc72454667db9, type: 3}
 --- !u!1001 &2639881758813448364
@@ -6165,6 +6181,10 @@ PrefabInstance:
     - target: {fileID: 2639881758547769149, guid: 8c27e98594153194880cc72454667db9, type: 3}
       propertyPath: m_Name
       value: Athlete
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639881758547769151, guid: 8c27e98594153194880cc72454667db9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c27e98594153194880cc72454667db9, type: 3}
