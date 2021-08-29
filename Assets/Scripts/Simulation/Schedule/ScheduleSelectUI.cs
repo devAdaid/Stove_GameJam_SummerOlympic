@@ -44,9 +44,12 @@ public class ScheduleSelectUI : MonoSingleton<ScheduleSelectUI>
         }
 
         var scheduleData = GameData.I.Schedule.GetData(schedule);
-        if (_goldPreview < scheduleData.GoldCost)
+        if (scheduleData.GoldCost > 0)
         {
-            return;
+            if (_goldPreview < scheduleData.GoldCost * Constant.DAY_PER_WEEK_COUNT)
+            {
+                return;
+            }
         }
 
         if (_currentScheduleIndex < _selectedSchedules.Length)

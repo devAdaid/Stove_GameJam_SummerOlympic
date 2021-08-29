@@ -273,7 +273,7 @@ public class SwimGameManager : MonoBehaviour
 
             }
             OlympicRecordData.I.SetPlayerRecord(list);
-            SceneManager.LoadScene("Ending");
+            SceneManager.LoadScene("5_Ending");
         }
         else
         {
