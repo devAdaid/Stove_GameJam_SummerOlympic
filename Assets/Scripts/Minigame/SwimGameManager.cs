@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SwimGameManager : MonoBehaviour
 {
     public static float BestRecord = -1f;
     public static float Rank = 0f;
+    public static int[] SwimmerIndicies;
+    public static bool isLastGame = false;
     [Header("References")]
     [SerializeField] SwimStatManager statManager;
     [SerializeField] Slider timmingBar;
@@ -109,7 +112,7 @@ public class SwimGameManager : MonoBehaviour
                 //���� ������ ����Ʈ
                 if (BestRecord == -1 || BestRecord > timer)
                     BestRecord = timer;
-                SwimGameManager.Rank = rank;
+                Rank = rank;
                 finishText.gameObject.SetActive(true);
                 break;
             }
@@ -247,6 +250,35 @@ public class SwimGameManager : MonoBehaviour
     {
         resultBoard.Close();
         yield return new WaitForSeconds(1.3f);
+        if (isLastGame)
+        {
+            List<PlayerRecord> list = new List<PlayerRecord>();
+            for (int i = 0; i < 5; i++)
+            {
+                PlayerRecord r = new PlayerRecord();
+                if (athletes[i].flagType == 0)
+                    r.nationName = "한국";
+                if (athletes[i].flagType == 1)
+                    r.nationName = "호주";
+                if (athletes[i].flagType == 2)
+                    r.nationName = "일본";
+                if (athletes[i].flagType == 3)
+                    r.nationName = "네덜란드";
+                if (athletes[i].flagType == 4)
+                    r.nationName = "남아프리카";
+                r.playerName = athletes[i].name;
+                r.record = athletes[i].finishedTime;
+                list.Add(r);
+
+            }
+            OlympicRecordData.I.SetPlayerRecord(list);
+            SceneManager.LoadScene("Ending");
+        }
+        else
+        {
+
+            SceneManager.LoadScene("2_Schedule");
+        }
         //change scene
     }
 }
