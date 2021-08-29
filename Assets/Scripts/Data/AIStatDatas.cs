@@ -10,10 +10,10 @@ public class AIStatData
     public readonly int Quickness;
     public readonly int Strength;
     public readonly int Flexibility;
-    public readonly int [] TapSpeeds;
+    public readonly int[] TapSpeeds;
     public readonly int FlagType;
     public readonly int DiveStat;
-    public AIStatData( int index, string name,
+    public AIStatData(int index, string name,
         int endurance, int quickness,
         int strength, int flexibility, int[] tapSpeeds, int flagType, int diveStat)
     {
@@ -39,28 +39,28 @@ public class AIStatDatas
         int index = 0;
         foreach (var line in parsedDatas)
         {
-            string name = (string)line["이름"];
-            int endurance = (int)line["지구력"];
-            int quickness = (int)line["순발력"];
-            int strength = (int)line["근력"];
-            int flexibility = (int)line["유연성"];
+            string name = (string)line["Name"];
+            int endurance = (int)line["Endurance"];
+            int quickness = (int)line["Quickness"];
+            int strength = (int)line["Strength"];
+            int flexibility = (int)line["Flexibility"];
             int[] tapSpeed = new int[4];
-            tapSpeed[0] = (int)line["스타트게임"];
+            tapSpeed[0] = (int)line["StartGame"];
             tapSpeed[1] = (int)line["25-50"];
             tapSpeed[2] = (int)line["50-75"];
             tapSpeed[3] = (int)line["75-100"];
             int flagType = 0;
-            string country = (string)line["국가"];
-            if (country == "호주")
+            string country = (string)line["Country"];
+            if (country == "Australia")
                 flagType = 1;
-            else if (country == "일본")
+            else if (country == "Japan")
                 flagType = 2;
-            else if (country == "네덜란드")
+            else if (country == "Netherlands")
                 flagType = 3;
-            else if (country == "남아프리카")
+            else if (country == "NorthAf")
                 flagType = 4;
-            int diveStat = (int)line["스타트게임"];
-            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility,tapSpeed, flagType, diveStat );
+            int diveStat = (int)line["StartGame"];
+            AIStatData data = new AIStatData(index, name, endurance, quickness, strength, flexibility, tapSpeed, flagType, diveStat);
             datas.Add(data);
         }
     }
