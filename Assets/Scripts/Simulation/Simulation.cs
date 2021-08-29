@@ -17,6 +17,7 @@ public class Simulation : Singleton<Simulation>
     public Simulation()
     {
         Swimmer = new SwimmerCharacter();
+        Gold = Constant.GOLD_DELIVERED_AT_MONTH;
         PassedMonth = 0;
         Day = 0;
         _selectedSchedules = null;
@@ -122,6 +123,7 @@ public class Simulation : Singleton<Simulation>
             // 다음 달로 진행한다.
             PassedMonth += 1;
             Day = 0;
+            Gold += Constant.GOLD_DELIVERED_AT_MONTH;
             SchedueProgressRoot.I.SetActive(false);
             ScheduleSelectUI.I.ResetSchedule();
         }
